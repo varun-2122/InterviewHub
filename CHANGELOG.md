@@ -12,3 +12,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-04-27 17:54 - fix: resolve CORS issues in API layer
 
 ### 2026-04-27 18:33 - fix: handle edge cases in code editor
+
+### 2026-04-27 18:21 - fix: resolve Monaco editor layout bug
