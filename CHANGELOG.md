@@ -14,3 +14,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-04-27 18:33 - fix: handle edge cases in code editor
 
 ### 2026-04-27 18:21 - fix: resolve Monaco editor layout bug
+
+### 2026-04-28 11:03 - feat: implement real-time collaboration
