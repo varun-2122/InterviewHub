@@ -20,3 +20,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-04-29 10:10 - docs: add API endpoint documentation
 
 ### 2026-04-29 10:51 - docs: update deployment instructions
+
+### 2026-04-29 20:05 - feat: add interview timer component
