@@ -24,3 +24,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-04-29 20:05 - feat: add interview timer component
 
 ### 2026-05-02 16:40 - refactor: optimize database queries
+
+### 2026-05-03 18:25 - style: polish recruiter dashboard cards
