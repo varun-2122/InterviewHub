@@ -28,3 +28,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-05-03 18:25 - style: polish recruiter dashboard cards
 
 ### 2026-05-04 16:48 - refactor: modularize API endpoint handlers
+
+### 2026-05-06 18:26 - refactor: clean up component structure
