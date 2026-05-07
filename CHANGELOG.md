@@ -34,3 +34,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-05-06 20:46 - feat: add interview scheduling component
 
 ### 2026-05-07 10:00 - style: enhance navbar responsiveness
+
+### 2026-05-07 13:54 - fix: resolve date timezone issues
