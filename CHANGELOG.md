@@ -36,3 +36,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-05-07 10:00 - style: enhance navbar responsiveness
 
 ### 2026-05-07 13:54 - fix: resolve date timezone issues
+
+### 2026-05-07 18:34 - fix: improve sign-in redirect flow
