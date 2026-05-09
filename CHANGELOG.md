@@ -40,3 +40,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-05-07 18:34 - fix: improve sign-in redirect flow
 
 ### 2026-05-09 12:35 - docs: add setup instructions
+
+### 2026-05-09 16:09 - docs: update API documentation
