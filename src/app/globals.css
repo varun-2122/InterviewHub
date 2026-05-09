@@ -1,0 +1,159 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ================================================================
+   Design System — Synthetic Intelligence Recruitment Interface
+   Source: synthetic_intelligence_recruitment_interface/DESIGN.md
+   ================================================================ */
+
+/* Google Fonts — Manrope (headings), Inter (body), JetBrains Mono (code) */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;450;500&display=swap');
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  /* Label caps utility — used for system status indicators */
+  .label-caps {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+}
+
+@layer base {
+  /* ──────────────────────────────────────────────────────────────
+     Light Mode — Design System Color Tokens
+     Primary:   Deep Slate Indigo (#182442)
+     Secondary: Electric Cyan (#00d2fd)
+     Surface:   #f7f9fb (off-white, not pure white)
+     ────────────────────────────────────────────────────────────── */
+  :root {
+    /* Surface / Background */
+    --background: 210 20% 98%;       /* #f7f9fb */
+    --foreground: 210 14% 11%;       /* #191c1e */
+
+    /* Card / Popover */
+    --card: 0 0% 100%;               /* #ffffff — surface-container-lowest */
+    --card-foreground: 210 14% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 14% 11%;
+
+    /* Primary — Deep Slate Indigo */
+    --primary: 222 44% 18%;          /* #182442 */
+    --primary-foreground: 0 0% 100%; /* white */
+
+    /* Secondary — Electric Cyan */
+    --secondary: 191 100% 50%;       /* #00d2fd */
+    --secondary-foreground: 196 100% 24%; /* #005669 */
+
+    /* Muted / Accent — surface containers */
+    --muted: 210 11% 93%;            /* #eceef0 */
+    --muted-foreground: 228 8% 28%;  /* #45464e */
+
+    --accent: 210 11% 93%;
+    --accent-foreground: 222 44% 18%;
+
+    /* Destructive / Error */
+    --destructive: 0 71% 41%;        /* #ba1a1a */
+    --destructive-foreground: 0 0% 100%;
+
+    /* Borders & Inputs */
+    --border: 220 14% 90%;           /* #e2e8f0 — 1px border from design */
+    --input: 220 14% 90%;
+    --ring: 191 100% 50%;            /* Electric Cyan focus ring */
+
+    /* Border radius — 4px default, 8px large (design: sharp/professional) */
+    --radius: 0.25rem;
+
+    /* Soft elevation shadow — 0px 4px 20px rgba(0,0,0,0.04) from design */
+    --shadow-card: 0px 4px 20px rgba(0, 0, 0, 0.04);
+    --shadow-hover: 0px 8px 24px rgba(0, 0, 0, 0.08);
+
+    /* Chart tokens */
+    --chart-1: 222 44% 18%;
+    --chart-2: 191 100% 50%;
+    --chart-3: 158 100% 13%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
+
+  /* ──────────────────────────────────────────────────────────────
+     Dark Mode — Deep Charcoal base (#0F172A), Electric Cyan accent
+     ────────────────────────────────────────────────────────────── */
+  .dark {
+    --background: 222 47% 11%;       /* #0F172A — deep charcoal */
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 14%;             /* slightly lighter than background */
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 14%;
+    --popover-foreground: 210 40% 98%;
+
+    /* Primary darkens to a lighter slate in dark mode for visibility */
+    --primary: 222 68% 75%;          /* #bac6ec — inverse-primary from design */
+    --primary-foreground: 222 44% 9%;
+
+    /* Secondary stays Electric Cyan — high contrast on dark */
+    --secondary: 191 100% 50%;       /* #00d2fd */
+    --secondary-foreground: 196 100% 8%;
+
+    --muted: 222 47% 18%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 222 47% 18%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 222 47% 22%;
+    --input: 222 47% 22%;
+    --ring: 191 100% 50%;
+
+    --shadow-card: 0px 4px 20px rgba(0, 0, 0, 0.3);
+    --shadow-hover: 0px 8px 24px rgba(0, 0, 0, 0.4);
+
+    --chart-1: 222 68% 75%;
+    --chart-2: 191 100% 50%;
+    --chart-3: 158 100% 40%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  /* Headings use Manrope per design system */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Manrope', system-ui, sans-serif;
+    letter-spacing: -0.01em;
+  }
+
+  /* Code blocks use JetBrains Mono per design system */
+  code, kbd, samp, pre {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  }
+}
