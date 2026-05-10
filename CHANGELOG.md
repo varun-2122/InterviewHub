@@ -42,3 +42,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-05-09 12:35 - docs: add setup instructions
 
 ### 2026-05-09 16:09 - docs: update API documentation
+
+### 2026-05-10 10:02 - refactor: consolidate API utility functions
