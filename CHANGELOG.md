@@ -48,3 +48,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-05-11 10:36 - fix: resolve hydration errors in Next.js
 
 ### 2026-05-12 20:33 - style: add loading skeleton components
+
+### 2026-05-13 22:35 - feat: implement code syntax highlighting
