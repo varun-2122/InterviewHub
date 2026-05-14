@@ -50,3 +50,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-05-12 20:33 - style: add loading skeleton components
 
 ### 2026-05-13 22:35 - feat: implement code syntax highlighting
+
+### 2026-05-14 10:36 - feat: add question bank management page
