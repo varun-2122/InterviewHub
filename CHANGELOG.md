@@ -54,3 +54,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-05-14 10:36 - feat: add question bank management page
 
 ### 2026-05-14 14:04 - fix: resolve WebSocket reconnection logic
+
+### 2026-05-17 19:14 - feat: add AI response analysis feature
