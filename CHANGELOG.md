@@ -60,3 +60,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-05-18 09:53 - style: add glassmorphism card effects
 
 ### 2026-05-18 16:34 - feat: add interview feedback templates
+
+### 2026-05-18 22:29 - fix: resolve memory leaks in video stream
