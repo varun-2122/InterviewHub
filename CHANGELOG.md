@@ -56,3 +56,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-05-14 14:04 - fix: resolve WebSocket reconnection logic
 
 ### 2026-05-17 19:14 - feat: add AI response analysis feature
+
+### 2026-05-18 09:53 - style: add glassmorphism card effects
