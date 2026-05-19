@@ -62,3 +62,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-05-18 16:34 - feat: add interview feedback templates
 
 ### 2026-05-18 22:29 - fix: resolve memory leaks in video stream
+
+### 2026-05-19 15:06 - fix: improve error handling in forms
