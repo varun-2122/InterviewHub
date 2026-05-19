@@ -66,3 +66,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-05-19 15:06 - fix: improve error handling in forms
 
 ### 2026-05-19 16:42 - style: improve mobile responsiveness
+
+### 2026-05-19 20:38 - refactor: separate layout and page logic
