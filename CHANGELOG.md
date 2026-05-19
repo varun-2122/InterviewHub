@@ -64,3 +64,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-05-18 22:29 - fix: resolve memory leaks in video stream
 
 ### 2026-05-19 15:06 - fix: improve error handling in forms
+
+### 2026-05-19 16:42 - style: improve mobile responsiveness
