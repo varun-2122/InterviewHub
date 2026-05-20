@@ -72,3 +72,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-05-20 09:37 - style: animate hero section on load
 
 ### 2026-05-20 13:46 - style: improve button hover effects
+
+### 2026-05-20 18:36 - feat: add interview result export feature
