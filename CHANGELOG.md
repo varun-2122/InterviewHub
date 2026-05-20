@@ -68,3 +68,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-05-19 16:42 - style: improve mobile responsiveness
 
 ### 2026-05-19 20:38 - refactor: separate layout and page logic
+
+### 2026-05-20 09:37 - style: animate hero section on load
