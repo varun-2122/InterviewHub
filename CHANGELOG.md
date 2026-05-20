@@ -70,3 +70,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-05-19 20:38 - refactor: separate layout and page logic
 
 ### 2026-05-20 09:37 - style: animate hero section on load
+
+### 2026-05-20 13:46 - style: improve button hover effects
