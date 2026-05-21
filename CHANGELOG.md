@@ -76,3 +76,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-05-20 18:36 - feat: add interview result export feature
 
 ### 2026-05-21 09:48 - fix: resolve authentication token expiry
+
+### 2026-05-21 17:25 - fix: resolve state management race condition
