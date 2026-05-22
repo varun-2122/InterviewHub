@@ -80,3 +80,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-05-21 17:25 - fix: resolve state management race condition
 
 ### 2026-05-22 11:16 - feat: add candidate search and filter
+
+### 2026-05-22 12:19 - feat: add recruiter dashboard analytics
