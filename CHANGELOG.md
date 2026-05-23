@@ -84,3 +84,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-05-22 12:19 - feat: add recruiter dashboard analytics
 
 ### 2026-05-23 09:34 - style: add micro-animations to buttons
+
+### 2026-05-23 19:09 - style: improve candidate profile UI
