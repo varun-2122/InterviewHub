@@ -88,3 +88,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-05-23 19:09 - style: improve candidate profile UI
 
 ### 2026-05-23 20:23 - feat: add whiteboard collaboration tool
+
+### 2026-05-25 09:32 - refactor: improve TypeScript strict types
