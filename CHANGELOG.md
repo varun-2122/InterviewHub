@@ -90,3 +90,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-05-23 20:23 - feat: add whiteboard collaboration tool
 
 ### 2026-05-25 09:32 - refactor: improve TypeScript strict types
+
+### 2026-05-26 10:41 - feat: add proctor signal clarity monitor
