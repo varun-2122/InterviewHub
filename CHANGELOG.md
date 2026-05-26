@@ -92,3 +92,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-05-25 09:32 - refactor: improve TypeScript strict types
 
 ### 2026-05-26 10:41 - feat: add proctor signal clarity monitor
+
+### 2026-05-26 14:43 - style: update color palette for dark mode
