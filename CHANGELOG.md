@@ -98,3 +98,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-05-26 20:58 - fix: handle concurrent session conflicts
 
 ### 2026-05-27 10:23 - fix: handle null pointer exceptions safely
+
+### 2026-05-27 19:39 - fix: resolve video call connection issues
