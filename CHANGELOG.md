@@ -96,3 +96,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-05-26 14:43 - style: update color palette for dark mode
 
 ### 2026-05-26 20:58 - fix: handle concurrent session conflicts
+
+### 2026-05-27 10:23 - fix: handle null pointer exceptions safely
