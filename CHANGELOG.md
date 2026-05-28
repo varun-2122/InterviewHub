@@ -100,3 +100,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-05-27 10:23 - fix: handle null pointer exceptions safely
 
 ### 2026-05-27 19:39 - fix: resolve video call connection issues
+
+### 2026-05-28 16:25 - test: add unit tests for auth module
