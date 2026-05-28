@@ -104,3 +104,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-05-28 16:25 - test: add unit tests for auth module
 
 ### 2026-05-28 20:21 - docs: add contribution guidelines
+
+### 2026-05-28 20:49 - refactor: optimize bundle size
