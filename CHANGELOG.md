@@ -110,3 +110,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-05-29 09:35 - docs: update README with features list
 
 ### 2026-05-29 10:59 - docs: document Convex database schema
+
+### 2026-05-29 21:31 - feat: add behavioral interview module
