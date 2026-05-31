@@ -114,3 +114,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-05-29 21:31 - feat: add behavioral interview module
 
 ### 2026-05-30 13:07 - fix: correct interview status transitions
+
+### 2026-05-31 22:14 - fix: improve WebRTC connection stability
