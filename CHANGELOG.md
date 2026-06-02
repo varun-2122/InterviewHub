@@ -116,3 +116,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-05-30 13:07 - fix: correct interview status transitions
 
 ### 2026-05-31 22:14 - fix: improve WebRTC connection stability
+
+### 2026-06-02 12:15 - feat: implement feedback collection form
