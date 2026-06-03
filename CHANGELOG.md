@@ -120,3 +120,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-06-02 12:15 - feat: implement feedback collection form
 
 ### 2026-06-02 15:06 - feat: add session replay functionality
+
+### 2026-06-03 12:17 - fix: patch security headers in middleware
