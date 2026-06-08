@@ -124,3 +124,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-06-03 12:17 - fix: patch security headers in middleware
 
 ### 2026-06-04 13:42 - feat: implement role-based access control
+
+### 2026-06-08 19:23 - feat: add email notification system
