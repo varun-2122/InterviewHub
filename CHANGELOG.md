@@ -130,3 +130,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-06-09 12:52 - fix: resolve build warnings and lint errors
 
 ### 2026-06-09 17:57 - feat: add candidate onboarding flow
+
+### 2026-06-09 20:31 - feat: add live coding environment
