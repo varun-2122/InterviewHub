@@ -132,3 +132,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-06-09 17:57 - feat: add candidate onboarding flow
 
 ### 2026-06-09 20:31 - feat: add live coding environment
+
+### 2026-06-10 17:11 - fix: resolve dark mode flicker on load
