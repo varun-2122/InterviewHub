@@ -136,3 +136,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-06-10 17:11 - fix: resolve dark mode flicker on load
 
 ### 2026-06-11 10:59 - feat: add candidate scoring system
+
+### 2026-06-11 19:12 - refactor: extract reusable custom hooks
