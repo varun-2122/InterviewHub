@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Mock Interview Session</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "background": "#f7f9fb",
+                      "on-primary-fixed": "#0d1a38",
+                      "on-background": "#191c1e",
+                      "secondary": "#00677e",
+                      "primary": "#182442",
+                      "surface-dim": "#d8dadc",
+                      "error": "#ba1a1a",
+                      "surface-container-low": "#f2f4f6",
+                      "on-tertiary-container": "#17bb83",
+                      "surface-container-highest": "#e0e3e5",
+                      "on-secondary-fixed": "#001f27",
+                      "on-error": "#ffffff",
+                      "tertiary-fixed": "#6ffbbe",
+                      "primary-fixed": "#dae2ff",
+                      "surface-bright": "#f7f9fb",
+                      "on-primary": "#ffffff",
+                      "on-secondary-fixed-variant": "#004e5f",
+                      "on-surface-variant": "#45464e",
+                      "secondary-fixed": "#b4ebff",
+                      "surface-container-high": "#e6e8ea",
+                      "on-primary-container": "#98a4c9",
+                      "secondary-container": "#00d2fd",
+                      "on-primary-fixed-variant": "#3a4666",
+                      "tertiary-container": "#00442d",
+                      "secondary-fixed-dim": "#3cd7ff",
+                      "on-secondary": "#ffffff",
+                      "inverse-surface": "#2d3133",
+                      "tertiary-fixed-dim": "#4edea3",
+                      "on-tertiary": "#ffffff",
+                      "on-surface": "#191c1e",
+                      "outline-variant": "#c6c6ce",
+                      "surface-tint": "#525e7f",
+                      "inverse-primary": "#bac6ec",
+                      "surface-container": "#eceef0",
+                      "primary-container": "#2e3a59",
+                      "tertiary": "#002c1b",
+                      "surface-variant": "#e0e3e5",
+                      "on-secondary-container": "#005669",
+                      "outline": "#75777e",
+                      "surface": "#f7f9fb",
+                      "surface-container-lowest": "#ffffff",
+                      "on-tertiary-fixed-variant": "#005236",
+                      "error-container": "#ffdad6",
+                      "primary-fixed-dim": "#bac6ec",
+                      "inverse-on-surface": "#eff1f3",
+                      "on-tertiary-fixed": "#002113",
+                      "on-error-container": "#93000a"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "stack-lg": "24px",
+                      "stack-md": "12px",
+                      "stack-sm": "4px",
+                      "margin-mobile": "16px",
+                      "margin-desktop": "40px",
+                      "base": "8px",
+                      "gutter": "24px",
+                      "container-max": "1280px"
+              },
+              "fontFamily": {
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "h2": [
+                              "Manrope"
+                      ],
+                      "label-caps": [
+                              "Inter"
+                      ],
+                      "h1-mobile": [
+                              "Manrope"
+                      ],
+                      "h3": [
+                              "Manrope"
+                      ],
+                      "code": [
+                              "JetBrains Mono"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "h1": [
+                              "Manrope"
+                      ],
+                      "body-sm": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h2": [
+                              "30px",
+                              {
+                                      "lineHeight": "38px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "h1-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "h3": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "0",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "code": [
+                              "14px",
+                              {
+                                      "lineHeight": "22px",
+                                      "fontWeight": "450"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h1": [
+                              "40px",
+                              {
+                                      "lineHeight": "48px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for focus */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #d8dadc; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #c6c6ce; }
+        
+        /* Layout resets */
+        body { margin: 0; overflow: hidden; }
+        .ide-layout { display: grid; grid-template-columns: 1fr 2.5fr 300px; height: 100vh; }
+    </style>
+</head>
+<body class="bg-surface-container-low text-on-surface font-body-md h-screen overflow-hidden flex flex-col">
+<!-- Proctoring / Top Bar -->
+<header class="bg-surface-container-lowest border-b border-outline-variant h-14 flex items-center justify-between px-4 shrink-0 shadow-sm z-20">
+<div class="flex items-center gap-4">
+<span class="font-h3 text-h3 text-primary tracking-tight">InterviewHub</span>
+<div class="h-4 w-[1px] bg-outline-variant"></div>
+<div class="flex items-center gap-2 text-on-surface-variant font-body-sm text-body-sm">
+<span class="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>
+<span>Session Active</span>
+<span class="ml-2 font-code text-code">00:42:15</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 text-on-surface-variant bg-surface-container py-1 px-3 rounded-full text-label-caps font-label-caps">
+<span class="material-symbols-outlined filled text-[16px] text-tertiary-fixed-dim">wifi</span>
+                Excellent Connection
+            </div>
+<button class="bg-primary text-on-primary font-label-caps text-label-caps px-4 py-2 rounded uppercase tracking-wider hover:bg-on-primary-fixed transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">stop_circle</span>
+                End Session
+            </button>
+</div>
+</header>
+<!-- Main IDE Layout -->
+<main class="ide-layout flex-1 overflow-hidden bg-background">
+<!-- Left Pane: Problem Description -->
+<section class="border-r border-outline-variant bg-surface-container-lowest flex flex-col h-full overflow-hidden">
+<div class="h-10 border-b border-outline-variant flex items-center px-4 bg-surface-container-low shrink-0">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Problem Description</span>
+</div>
+<div class="p-6 overflow-y-auto h-full flex flex-col gap-stack-lg">
+<div>
+<h2 class="font-h2 text-h2 text-on-surface mb-2">Two Sum</h2>
+<div class="flex gap-2 mb-4">
+<span class="px-2 py-1 bg-surface-variant text-on-surface-variant rounded text-label-caps font-label-caps">Array</span>
+<span class="px-2 py-1 bg-surface-variant text-on-surface-variant rounded text-label-caps font-label-caps">Hash Table</span>
+</div>
+</div>
+<div class="prose prose-sm font-body-md text-on-surface-variant max-w-none">
+<p class="mb-4">Given an array of integers <code>nums</code> and an integer <code>target</code>, return <em>indices of the two numbers such that they add up to <code>target</code></em>.</p>
+<p class="mb-4">You may assume that each input would have <strong><em>exactly</em> one solution</strong>, and you may not use the <em>same</em> element twice.</p>
+<p>You can return the answer in any order.</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg border border-outline-variant">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider mb-2">Example 1</h3>
+<div class="font-code text-code text-on-surface bg-surface-container-lowest p-3 rounded border border-outline-variant mb-2">
+                        Input: nums = [2,7,11,15], target = 9<br/>
+                        Output: [0,1]<br/>
+                        Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+                    </div>
+</div>
+</div>
+</section>
+<!-- Center Pane: Code Editor -->
+<section class="flex flex-col h-full overflow-hidden bg-surface-container-lowest">
+<!-- Editor Tabs -->
+<div class="flex border-b border-outline-variant bg-surface-container-low h-10 shrink-0">
+<button class="px-4 border-r border-outline-variant flex items-center gap-2 bg-surface-container-lowest border-t-2 border-t-secondary-container text-primary font-body-sm text-body-sm bg-white">
+<span class="material-symbols-outlined text-[16px]">description</span>
+                    solution.py
+                </button>
+<button class="px-4 border-r border-outline-variant flex items-center gap-2 text-on-surface-variant hover:bg-surface-container-lowest hover:text-on-surface transition-colors font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px]">science</span>
+                    test_cases.py
+                </button>
+</div>
+<!-- Editor Area (Simulated) -->
+<div class="flex-1 overflow-auto bg-[#1e1e1e] text-[#d4d4d4] font-code text-code p-4 flex">
+<!-- Gutter -->
+<div class="flex flex-col text-[#858585] text-right pr-4 select-none border-r border-[#404040] mr-4">
+<span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span>
+</div>
+<!-- Code -->
+<div class="flex-1 whitespace-pre font-code">
+<span class="text-[#c586c0]">class</span> <span class="text-[#4ec9b0]">Solution</span>:
+    <span class="text-[#c586c0]">def</span> <span class="text-[#dcdcaa]">twoSum</span>(<span class="text-[#9cdcfe]">self</span>, <span class="text-[#9cdcfe]">nums</span>: <span class="text-[#4ec9b0]">List</span>[<span class="text-[#4ec9b0]">int</span>], <span class="text-[#9cdcfe]">target</span>: <span class="text-[#4ec9b0]">int</span>) -&gt; <span class="text-[#4ec9b0]">List</span>[<span class="text-[#4ec9b0]">int</span>]:
+        <span class="text-[#6a9955]"># Initialize a hash map to store seen numbers and their indices</span>
+<span class="text-[#9cdcfe]">seen</span> = {}
+        
+        <span class="text-[#c586c0]">for</span> <span class="text-[#9cdcfe]">i</span>, <span class="text-[#9cdcfe]">num</span> <span class="text-[#c586c0]">in</span> <span class="text-[#dcdcaa]">enumerate</span>(<span class="text-[#9cdcfe]">nums</span>):
+            <span class="text-[#9cdcfe]">complement</span> = <span class="text-[#9cdcfe]">target</span> - <span class="text-[#9cdcfe]">num</span>
+</div>
+</div>
+<!-- Terminal / Output -->
+<div class="h-48 border-t border-outline-variant bg-surface-container-lowest flex flex-col shrink-0">
+<div class="h-8 border-b border-outline-variant flex items-center px-4 bg-surface-container-low justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Output / Terminal</span>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[16px]">clear_all</span>
+</button>
+</div>
+<div class="p-4 font-code text-code text-on-surface-variant overflow-y-auto">
+                    &gt; Ready for execution. Press Run Code to evaluate.
+                </div>
+</div>
+</section>
+<!-- Right Pane: Video & AI Feedback -->
+<section class="border-l border-outline-variant bg-surface-container-lowest flex flex-col h-full overflow-hidden relative">
+<!-- Video Feed -->
+<div class="h-1/2 border-b border-outline-variant relative bg-black shrink-0">
+<img class="w-full h-full object-cover opacity-90" data-alt="A high-quality webcam view of a professional technical interviewer in a modern, well-lit home office setup. The interviewer is a person with a friendly but focused expression, looking directly at the camera. The background is slightly blurred (bokeh) featuring a tidy bookshelf and subtle warm ambient lighting. The overall lighting is bright and even, fitting a light-mode UI context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfZYvTitdjFd0vKWt2M3nGzS0VrbaOFxyx9b4IL1jOJyc619fvwrjyeDJykTcGC6fSlbi4X36MVngmHwUxvkBCVtj4W9gdnIdHsGu2_0rTbkUVCTowCeIXpYtaTPuy7wJCloVnYE5OsK8jThgpMUUylmD-9_MLucoDPA9yj71uWWJGUVAhbNihr5OD4OTbyJGM5aGQB5cgvwDhP-ll0KkiZO8A0XhCfXJq9kVVmKxHFMfpJmr6mjED"/>
+<div class="absolute bottom-3 left-3 bg-inverse-surface/80 text-inverse-on-surface px-2 py-1 rounded backdrop-blur-sm text-label-caps font-label-caps flex items-center gap-1">
+<span class="material-symbols-outlined filled text-[14px] text-secondary-container">record_voice_over</span>
+                    Alex (Interviewer)
+                </div>
+</div>
+<!-- AI Assistant Panel -->
+<div class="flex-1 flex flex-col overflow-hidden bg-surface-container-lowest">
+<div class="h-10 border-b border-outline-variant flex items-center px-4 bg-surface-container-low shrink-0 justify-between">
+<div class="flex items-center gap-2 text-primary font-label-caps text-label-caps uppercase tracking-wider">
+<span class="material-symbols-outlined filled text-[16px]">smart_toy</span>
+                        AI Co-Pilot Status
+                    </div>
+</div>
+<div class="p-4 overflow-y-auto flex flex-col gap-stack-md">
+<!-- Sentiment / Status -->
+<div class="bg-surface-container p-3 rounded-lg border border-outline-variant">
+<div class="flex items-center justify-between mb-2">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Candidate Focus</span>
+<span class="font-label-caps text-label-caps text-tertiary-fixed-dim bg-tertiary text-on-tertiary px-2 py-0.5 rounded">HIGH</span>
+</div>
+<div class="w-full bg-surface-variant rounded-full h-1.5">
+<div class="bg-tertiary-fixed-dim h-1.5 rounded-full" style="width: 85%"></div>
+</div>
+</div>
+<!-- Feedback Log -->
+<div class="flex gap-3">
+<div class="mt-1">
+<span class="material-symbols-outlined text-[20px] text-secondary-container">lightbulb</span>
+</div>
+<div class="bg-surface-container-low p-3 rounded-lg rounded-tl-none border border-outline-variant text-body-sm font-body-sm text-on-surface">
+<p>Good start using a hash map. Consider explaining time complexity before finalizing the loop.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Floating Control Bar -->
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-surface-container-lowest/90 backdrop-blur-md p-2 rounded-full border border-outline-variant shadow-[0_4px_20px_rgba(0,0,0,0.08)]">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-highest hover:text-primary transition-colors">
+<span class="material-symbols-outlined">mic</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-highest hover:text-primary transition-colors">
+<span class="material-symbols-outlined">videocam</span>
+</button>
+<div class="w-[1px] h-6 bg-outline-variant mx-1"></div>
+<button class="bg-secondary-container text-on-secondary-container font-label-caps text-label-caps px-6 py-2 rounded-full uppercase tracking-wider hover:bg-secondary-fixed-dim transition-colors flex items-center gap-2 shadow-sm font-bold">
+<span class="material-symbols-outlined filled text-[18px]">play_arrow</span>
+                    Run Code
+                </button>
+</div>
+</section>
+</main>
+</body></html>
