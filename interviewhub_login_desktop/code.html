@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>InterviewHub - Login</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "background": "#f7f9fb",
+                      "on-primary-fixed": "#0d1a38",
+                      "on-background": "#191c1e",
+                      "secondary": "#00677e",
+                      "primary": "#182442",
+                      "surface-dim": "#d8dadc",
+                      "error": "#ba1a1a",
+                      "surface-container-low": "#f2f4f6",
+                      "on-tertiary-container": "#17bb83",
+                      "surface-container-highest": "#e0e3e5",
+                      "on-secondary-fixed": "#001f27",
+                      "on-error": "#ffffff",
+                      "tertiary-fixed": "#6ffbbe",
+                      "primary-fixed": "#dae2ff",
+                      "surface-bright": "#f7f9fb",
+                      "on-primary": "#ffffff",
+                      "on-secondary-fixed-variant": "#004e5f",
+                      "on-surface-variant": "#45464e",
+                      "secondary-fixed": "#b4ebff",
+                      "surface-container-high": "#e6e8ea",
+                      "on-primary-container": "#98a4c9",
+                      "secondary-container": "#00d2fd",
+                      "on-primary-fixed-variant": "#3a4666",
+                      "tertiary-container": "#00442d",
+                      "secondary-fixed-dim": "#3cd7ff",
+                      "on-secondary": "#ffffff",
+                      "inverse-surface": "#2d3133",
+                      "tertiary-fixed-dim": "#4edea3",
+                      "on-tertiary": "#ffffff",
+                      "on-surface": "#191c1e",
+                      "outline-variant": "#c6c6ce",
+                      "surface-tint": "#525e7f",
+                      "inverse-primary": "#bac6ec",
+                      "surface-container": "#eceef0",
+                      "primary-container": "#2e3a59",
+                      "tertiary": "#002c1b",
+                      "surface-variant": "#e0e3e5",
+                      "on-secondary-container": "#005669",
+                      "outline": "#75777e",
+                      "surface": "#f7f9fb",
+                      "surface-container-lowest": "#ffffff",
+                      "on-tertiary-fixed-variant": "#005236",
+                      "error-container": "#ffdad6",
+                      "primary-fixed-dim": "#bac6ec",
+                      "inverse-on-surface": "#eff1f3",
+                      "on-tertiary-fixed": "#002113",
+                      "on-error-container": "#93000a"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "stack-lg": "24px",
+                      "stack-md": "12px",
+                      "stack-sm": "4px",
+                      "margin-mobile": "16px",
+                      "margin-desktop": "40px",
+                      "base": "8px",
+                      "gutter": "24px",
+                      "container-max": "1280px"
+              },
+              "fontFamily": {
+                      "body-lg": ["Inter"],
+                      "h2": ["Manrope"],
+                      "label-caps": ["Inter"],
+                      "h1-mobile": ["Manrope"],
+                      "h3": ["Manrope"],
+                      "code": ["JetBrains Mono"],
+                      "body-md": ["Inter"],
+                      "h1": ["Manrope"],
+                      "body-sm": ["Inter"]
+              },
+              "fontSize": {
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "h2": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "h1-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "h3": ["24px", {"lineHeight": "32px", "letterSpacing": "0", "fontWeight": "600"}],
+                      "code": ["14px", {"lineHeight": "22px", "fontWeight": "450"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "h1": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .ai-cyan-glow:focus-within {
+            box-shadow: 0 0 0 2px #00d2fd;
+            border-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen flex items-center justify-center p-4">
+<!-- Login Container -->
+<div class="bg-surface-container-lowest w-full max-w-[480px] rounded-xl border border-surface-variant shadow-[0px_4px_20px_rgba(0,0,0,0.04)] p-stack-lg relative overflow-hidden">
+<!-- Subtle Ambient Glow -->
+<div class="absolute -top-32 -right-32 w-64 h-64 bg-secondary-fixed/20 rounded-full blur-3xl pointer-events-none"></div>
+<!-- Header / Logo -->
+<div class="flex flex-col items-center justify-center text-center mb-stack-lg">
+<div class="w-12 h-12 bg-primary rounded-lg flex items-center justify-center mb-stack-md shadow-sm">
+<span class="material-symbols-outlined text-on-primary text-[28px]" data-icon="hub">hub</span>
+</div>
+<h1 class="font-h2 text-h2 text-primary tracking-tight">InterviewHub</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-stack-sm">Sign in to continue your recruitment journey.</p>
+</div>
+<!-- SSO Buttons -->
+<div class="space-y-stack-md mb-stack-lg">
+<button class="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-DEFAULT border border-outline-variant bg-surface-container-lowest hover:bg-surface-container-low transition-colors duration-200">
+<img class="w-5 h-5" data-alt="A small, high-quality, recognizable GitHub logo icon designed for a modern user interface. The icon uses a sleek, solid black silhouette on a white background, representing the popular developer platform. It is clean, crisp, and perfectly scaled for a digital button, reflecting a professional technical recruitment context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxKipqXVySJ9T5dGzIrlhIHOPqmrq8t_vM425d7vLcVvF5yXYY8O45WkPyzQnz5_JEQSU2YlUD9C2d4w36aL306A_0RCxIRf_Yz_scGWO3nJUTqM2lf47Rzs457tJ-R9CCBMsn0IrQvddWP2ghXGjyAz2a0d7AnVRVwPtGnttUEJ_uriXtb1bZYARFjVQ6jOMj5dF9MKu03npLFDL3eiCVPJLNvKyQd3kjmwbidlxVE6aGq-EX35bX"/>
+<span class="font-body-md text-body-md font-medium text-on-surface">Continue with GitHub</span>
+</button>
+<button class="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-DEFAULT border border-outline-variant bg-surface-container-lowest hover:bg-surface-container-low transition-colors duration-200">
+<img class="w-5 h-5" data-alt="A small, high-quality, recognizable Google 'G' logo icon designed for a modern user interface. The icon features the standard multi-colored Google brand colors (blue, red, yellow, green) on a white background. It is clean, crisp, and perfectly scaled for a digital single sign-on button, reflecting a reliable and professional service." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6TFk8mAc0sjAaqFNFlQj4l8S7saNyzG8pCrs5Irf7rIVZ-iS7l-Glkv2J0znkomxlS3OPVPE3sY6yfxcS8fbcMAv7PU8yDG_BLIiv6UrzaqY11hejQzeRrA56Buoe-sFAr4oP_wfEYDYBYyXusiq3AhtDQpkW0MupAdUxnLYBSzNTBYAFUFo8-tNnuQQBRa0YselM10IZYbVFY8rykBqyL1jiQZutQpCA_PPEBoJBqxYenQD_ugfr"/>
+<span class="font-body-md text-body-md font-medium text-on-surface">Continue with Google</span>
+</button>
+</div>
+<!-- Divider -->
+<div class="flex items-center gap-4 mb-stack-lg">
+<div class="flex-1 h-px bg-outline-variant"></div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Or</span>
+<div class="flex-1 h-px bg-outline-variant"></div>
+</div>
+<!-- Form -->
+<form class="space-y-stack-lg">
+<div class="space-y-stack-md">
+<div class="space-y-stack-sm">
+<label class="block font-body-sm text-body-sm font-medium text-on-surface" for="email">Email address</label>
+<div class="relative ai-cyan-glow rounded-DEFAULT transition-shadow duration-200">
+<input class="w-full pl-4 pr-10 py-3 bg-surface-container-lowest border border-outline-variant rounded-DEFAULT text-on-surface font-body-md focus:ring-0 focus:outline-none placeholder:text-outline" id="email" placeholder="name@company.com" type="email"/>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline-variant pointer-events-none" data-icon="mail">mail</span>
+</div>
+</div>
+<div class="space-y-stack-sm">
+<div class="flex items-center justify-between">
+<label class="block font-body-sm text-body-sm font-medium text-on-surface" for="password">Password</label>
+<a class="font-body-sm text-body-sm text-secondary hover:text-secondary-container transition-colors duration-200" href="#">Forgot password?</a>
+</div>
+<div class="relative ai-cyan-glow rounded-DEFAULT transition-shadow duration-200">
+<input class="w-full pl-4 pr-10 py-3 bg-surface-container-lowest border border-outline-variant rounded-DEFAULT text-on-surface font-body-md focus:ring-0 focus:outline-none placeholder:text-outline" id="password" placeholder="••••••••" type="password"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-outline-variant hover:text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</button>
+</div>
+</div>
+</div>
+<button class="w-full py-3 px-4 bg-primary text-on-primary font-body-md font-medium rounded-DEFAULT hover:bg-primary/90 active:scale-[0.98] transition-all duration-200 shadow-sm flex items-center justify-center gap-2" type="submit">
+                Sign In
+                <span class="material-symbols-outlined text-[20px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</form>
+<!-- Footer -->
+<div class="mt-stack-lg text-center">
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                Don't have an account? <a class="text-secondary font-medium hover:text-secondary-container transition-colors duration-200" href="#">Sign up</a>
+</p>
+</div>
+</div>
+</body></html>
