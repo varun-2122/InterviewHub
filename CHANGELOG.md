@@ -142,3 +142,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-06-11 19:55 - style: polish landing page hero section
 
 ### 2026-06-12 11:36 - fix: resolve Convex mutation error handling
+
+### 2026-06-12 19:41 - feat: add readiness score indicator
