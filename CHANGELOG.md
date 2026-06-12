@@ -144,3 +144,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-06-12 11:36 - fix: resolve Convex mutation error handling
 
 ### 2026-06-12 19:41 - feat: add readiness score indicator
+
+### 2026-06-12 20:29 - feat: integrate Clerk authentication
