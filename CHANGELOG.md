@@ -140,3 +140,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-06-11 19:12 - refactor: extract reusable custom hooks
 
 ### 2026-06-11 19:55 - style: polish landing page hero section
+
+### 2026-06-12 11:36 - fix: resolve Convex mutation error handling
