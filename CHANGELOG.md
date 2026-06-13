@@ -146,3 +146,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-06-12 19:41 - feat: add readiness score indicator
 
 ### 2026-06-12 20:29 - feat: integrate Clerk authentication
+
+### 2026-06-13 11:50 - style: enhance dashboard grid layout
