@@ -150,3 +150,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-06-13 11:50 - style: enhance dashboard grid layout
 
 ### 2026-06-13 20:42 - docs: add environment variable guide
+
+### 2026-06-14 11:28 - fix: handle expired interview links
