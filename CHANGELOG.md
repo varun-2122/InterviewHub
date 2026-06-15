@@ -160,3 +160,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-06-15 10:29 - feat: implement feedback collection form
 
 ### 2026-06-15 14:15 - feat: add live coding environment
+
+### 2026-06-15 15:33 - feat: add candidate search and filter
