@@ -156,3 +156,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-06-14 14:34 - style: improve accessibility contrast ratios
 
 ### 2026-06-14 21:22 - docs: update README with features list
+
+### 2026-06-15 10:29 - feat: implement feedback collection form
