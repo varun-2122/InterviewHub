@@ -162,3 +162,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-06-15 14:15 - feat: add live coding environment
 
 ### 2026-06-15 15:33 - feat: add candidate search and filter
+
+### 2026-06-17 16:56 - feat: add email notification system
