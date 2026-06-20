@@ -168,3 +168,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-06-17 19:14 - refactor: modularize API endpoint handlers
 
 ### 2026-06-19 16:36 - fix: resolve authentication token expiry
+
+### 2026-06-20 16:48 - fix: handle concurrent session conflicts
