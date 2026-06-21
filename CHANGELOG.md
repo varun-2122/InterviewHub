@@ -174,3 +174,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-06-20 20:31 - feat: integrate Clerk authentication
 
 ### 2026-06-20 22:53 - fix: improve WebRTC connection stability
+
+### 2026-06-21 09:43 - docs: update API documentation
