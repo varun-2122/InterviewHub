@@ -180,3 +180,5 @@ All notable changes to InterviewHub will be documented in this file.
 ### 2026-06-21 15:17 - style: add micro-animations to buttons
 
 ### 2026-06-21 17:13 - test: add unit tests for auth module
+
+### 2026-06-23 11:42 - fix: handle edge cases in code editor
