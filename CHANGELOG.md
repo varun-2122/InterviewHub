@@ -71,3 +71,5 @@ All notable changes to InterviewHub are documented here.
 | AI behavioral analysis / STAR feedback | 🔴 Not implemented (planned) |
 | In-app interviewer role promotion | 🔴 Not implemented (planned) |
 | Automated test suite | 🔴 Not implemented (planned) |
+
+### 2026-06-24 17:49 - refactor: consolidate API utility functions
