@@ -75,3 +75,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-06-24 17:49 - refactor: consolidate API utility functions
 
 ### 2026-06-24 17:50 - fix: patch security headers in middleware
+
+### 2026-06-25 18:19 - feat: add interview feedback templates
