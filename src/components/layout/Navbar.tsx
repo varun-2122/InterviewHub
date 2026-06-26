@@ -1,33 +1,76 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ThemeToggle } from "../theme/ThemeToggle";
-import { Terminal } from "lucide-react";
 import { SignedIn, UserButton } from "@clerk/nextjs";
 import DashboardLink from "./DashboardLink";
+import { Bell, Settings } from "lucide-react";
 
-// Main header layout navigation bar
+// Top Navigation bar matching Stitch UI design system
 export function Navbar() {
+  const pathname = usePathname();
+
+  const navLinks = [
+    { name: "Home", href: "/" },
+    { name: "Recordings", href: "/recordings" },
+  ];
+
   return (
-    <nav className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-50">
-      <div className="flex h-16 items-center px-4 container mx-auto justify-between">
-        <Link
-          href="/"
-          className="flex items-center gap-2 font-semibold text-xl tracking-tight font-mono hover:opacity-90 transition-opacity"
-        >
-          <Terminal className="size-6 text-emerald-500" />
-          <span className="bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">
-            InterviewHub
-          </span>
-        </Link>
+    <nav className="bg-card text-foreground border-b border-border sticky top-0 z-50 shadow-sm">
+      <div className="flex h-16 items-center px-4 md:px-8 max-w-7xl mx-auto justify-between">
+        <div className="flex items-center gap-8">
+          <Link
+            href="/"
+            className="flex items-center gap-2 font-bold text-xl font-heading text-primary tracking-tight"
+          >
+            <div className="size-8 rounded bg-primary flex items-center justify-center text-primary-foreground font-extrabold text-sm">
+              IH
+            </div>
+            <span>InterviewHub</span>
+          </Link>
+
+          <div className="hidden md:flex items-center gap-6 text-sm font-medium">
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`transition-colors pb-1 ${
+                    isActive
+                      ? "text-primary font-bold border-b-2 border-primary"
+                      : "text-muted-foreground hover:text-primary"
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
+          </div>
+        </div>
 
         <SignedIn>
-          <div className="flex items-center space-x-3.5">
+          <div className="flex items-center gap-3">
             <DashboardLink />
+            <button
+              aria-label="Notifications"
+              className="p-2 text-muted-foreground hover:text-foreground rounded-full hover:bg-muted transition-colors"
+            >
+              <Bell className="size-4.5" />
+            </button>
+            <button
+              aria-label="Settings"
+              className="p-2 text-muted-foreground hover:text-foreground rounded-full hover:bg-muted transition-colors"
+            >
+              <Settings className="size-4.5" />
+            </button>
             <ThemeToggle />
-            <UserButton 
+            <UserButton
               appearance={{
                 elements: {
-                  avatarBox: "size-8 rounded-full border border-border"
-                }
+                  avatarBox: "size-9 rounded-full border border-border",
+                },
               }}
             />
           </div>
