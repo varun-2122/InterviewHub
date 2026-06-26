@@ -4,14 +4,24 @@ import { Call, useStreamVideoClient } from "@stream-io/video-react-sdk";
 
 // Fetches user-associated call sessions and partitions them by timeframe
 export const useUserMeetings = () => {
-  const { user: clerkUser } = useUser();
+  const { user: clerkUser, isLoaded: isUserLoaded } = useUser();
   const videoClient = useStreamVideoClient();
-  const [meetingsList, setMeetingsList] = useState<Call[]>();
-  const [isLoading, setIsLoading] = useState(false);
+  const [meetingsList, setMeetingsList] = useState<Call[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
+    let isMounted = true;
+
     const fetchAttendeeMeetings = async () => {
-      if (!videoClient || !clerkUser?.id) return;
+      if (!isUserLoaded) return;
+
+      if (!clerkUser?.id || !videoClient) {
+        if (isMounted) {
+          setIsLoading(false);
+          setMeetingsList([]);
+        }
+        return;
+      }
 
       setIsLoading(true);
 
@@ -27,32 +37,40 @@ export const useUserMeetings = () => {
           },
         });
 
-        setMeetingsList(calls);
+        if (isMounted) {
+          setMeetingsList(calls || []);
+        }
       } catch (err) {
         console.error("Error retrieving user meetings:", err);
+        if (isMounted) {
+          setMeetingsList([]);
+        }
       } finally {
-        setIsLoading(false);
+        if (isMounted) {
+          setIsLoading(false);
+        }
       }
     };
 
     fetchAttendeeMeetings();
-  }, [videoClient, clerkUser?.id]);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [videoClient, clerkUser?.id, isUserLoaded]);
 
   const current = new Date();
 
-  // Sessions that have already finished or started in the past
   const completedMeetings = meetingsList?.filter((session: Call) => {
     const { startsAt, endedAt } = session.state;
     return (startsAt && new Date(startsAt) < current) || !!endedAt;
   });
 
-  // Scheduled sessions set in the future
   const upcomingMeetings = meetingsList?.filter((session: Call) => {
     const { startsAt } = session.state;
     return startsAt && new Date(startsAt) > current;
   });
 
-  // Active call rooms that are live currently
   const liveMeetings = meetingsList?.filter((session: Call) => {
     const { startsAt, endedAt } = session.state;
     return startsAt && new Date(startsAt) < current && !endedAt;
