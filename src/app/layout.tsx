@@ -8,6 +8,10 @@ import ThemeWrapper from "@/components/theme/ThemeWrapper";
 import LandingPage from "@/components/layout/LandingPage";
 import { Toaster } from "react-hot-toast";
 
+const clerkPublishableKey =
+  process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY ||
+  "pk_test_c3Ryb25nLWdpcmFmZmUtMzIuY2xlcmsuYWNjb3VudHMuZGV2JA";
+
 export const metadata: Metadata = {
   title: "InterviewHub — Precision Recruitment System",
   description:
@@ -20,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider publishableKey={clerkPublishableKey}>
       <html lang="en" suppressHydrationWarning>
         <head>
           {/* Material Symbols Outlined font from Google Fonts for Stitch UI icons */}
