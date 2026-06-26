@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "@stream-io/video-react-sdk/dist/css/styles.css";
 import "./globals.css";
-import { SignedIn, SignedOut } from "@clerk/nextjs";
+import { ClerkProvider, SignedIn, SignedOut } from "@clerk/nextjs";
 import BackendProvider from "@/components/providers/BackendProvider";
 import Navbar from "@/components/layout/Navbar";
 import ThemeWrapper from "@/components/theme/ThemeWrapper";
@@ -9,16 +9,9 @@ import LandingPage from "@/components/layout/LandingPage";
 import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
-  title: "InterviewHub — Technical Assessment Workspace",
+  title: "InterviewHub — Precision Recruitment System",
   description:
-    "High-signal, low-noise live coding interview platform for technical talent. " +
-    "Real-time collaborative workspace with video, code editor, and structured evaluation.",
-  keywords: ["technical interview", "live coding", "collaborative workspace", "recruitment platform"],
-  openGraph: {
-    title: "InterviewHub — Technical Assessment Workspace",
-    description: "Real-time collaborative live coding interview platform.",
-    type: "website",
-  },
+    "High-signal, low-noise assessment environments designed for top technical talent. Prepare, practice, and prove your skills.",
 };
 
 export default function RootLayout({
@@ -27,39 +20,53 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <BackendProvider>
+    <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
-        <body className="antialiased font-sans">
-          <ThemeWrapper
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {/* Authenticated users see the app shell (navbar + content) */}
-            <SignedIn>
-              <div className="min-h-screen">
-                <Navbar />
-                <main className="px-4 sm:px-6 lg:px-8">{children}</main>
-              </div>
-            </SignedIn>
+        <head>
+          {/* Material Symbols Outlined font from Google Fonts for Stitch UI icons */}
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+          />
+          {/* Google Fonts — Manrope, Inter, JetBrains Mono */}
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+          />
+        </head>
+        <body className="antialiased font-sans bg-background text-foreground min-h-screen">
+          <BackendProvider>
+            <ThemeWrapper
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              {/* Authenticated users see the app shell */}
+              <SignedIn>
+                <div className="min-h-screen flex flex-col">
+                  <Navbar />
+                  <main className="flex-1">{children}</main>
+                </div>
+              </SignedIn>
 
-            {/* Unauthenticated visitors see the landing page instead of an immediate redirect */}
-            <SignedOut>
-              <LandingPage />
-            </SignedOut>
+              {/* Unauthenticated visitors see the public landing page */}
+              <SignedOut>
+                <LandingPage />
+              </SignedOut>
 
-            <Toaster
-              toastOptions={{
-                style: {
-                  fontFamily: "Inter, system-ui, sans-serif",
-                  fontSize: "0.875rem",
-                },
-              }}
-            />
-          </ThemeWrapper>
+              <Toaster
+                toastOptions={{
+                  style: {
+                    fontFamily: "Inter, system-ui, sans-serif",
+                    fontSize: "0.875rem",
+                  },
+                }}
+              />
+            </ThemeWrapper>
+          </BackendProvider>
         </body>
       </html>
-    </BackendProvider>
+    </ClerkProvider>
   );
 }
