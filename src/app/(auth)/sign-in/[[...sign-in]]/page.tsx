@@ -1,4 +1,5 @@
 import { SignIn } from "@clerk/nextjs";
+import { dark } from "@clerk/themes";
 
 export default function SignInPage() {
   return (
@@ -6,22 +7,32 @@ export default function SignInPage() {
       <div className="w-full max-w-[480px]">
         <SignIn
           appearance={{
+            baseTheme: dark,
+            variables: {
+              colorPrimary: "#00d2fd",
+              colorBackground: "#0f172a",
+              colorInputBackground: "#1e293b",
+              colorInputText: "#ffffff",
+              colorText: "#ffffff",
+              colorTextSecondary: "#94a3b8",
+            },
             elements: {
               rootBox: "w-full",
-              card: "bg-card border border-border shadow-md rounded-xl p-6",
-              headerTitle: "font-heading text-xl font-bold text-primary text-center",
-              headerSubtitle: "text-xs text-muted-foreground text-center",
+              card: "bg-[#0f172a] border border-slate-800 shadow-2xl rounded-xl p-6",
+              headerTitle: "font-heading text-xl font-bold text-white text-center",
+              headerSubtitle: "text-xs text-slate-400 text-center",
               socialButtonsBlockButton:
-                "border border-border bg-card text-foreground font-medium text-xs rounded hover:bg-muted transition-colors",
-              dividerLine: "bg-border",
-              dividerText: "text-xs label-caps text-muted-foreground uppercase",
-              formFieldLabel: "text-xs font-semibold text-foreground",
+                "border border-slate-700 bg-[#1e293b] text-white font-medium text-xs rounded hover:bg-slate-800 transition-colors",
+              dividerLine: "bg-slate-800",
+              dividerText: "text-xs label-caps text-slate-400 uppercase",
+              formFieldLabel: "text-xs font-semibold text-slate-200",
               formFieldInput:
-                "bg-card border border-border rounded text-xs text-foreground focus:ring-1 focus:ring-secondary",
+                "bg-[#1e293b] border border-slate-700 rounded text-xs text-white placeholder:text-slate-500 focus:ring-1 focus:ring-[#00d2fd]",
               formButtonPrimary:
-                "bg-primary hover:bg-primary/90 text-primary-foreground text-xs font-bold rounded py-2.5 transition-all shadow-sm",
-              footerActionText: "text-xs text-muted-foreground",
-              footerActionLink: "text-xs text-secondary font-semibold hover:underline",
+                "bg-[#182442] hover:bg-[#25355c] text-white text-xs font-bold rounded py-2.5 transition-all shadow-md border border-slate-700",
+              footer: "bg-[#0f172a] border-t border-slate-800",
+              footerActionText: "text-xs text-slate-400",
+              footerActionLink: "text-xs text-[#00d2fd] font-semibold hover:underline",
             },
           }}
         />
