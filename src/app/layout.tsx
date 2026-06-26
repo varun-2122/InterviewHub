@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import "@stream-io/video-react-sdk/dist/css/styles.css";
 import "./globals.css";
-import { ClerkProvider, SignedIn, SignedOut } from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
 import BackendProvider from "@/components/providers/BackendProvider";
 import Navbar from "@/components/layout/Navbar";
 import ThemeWrapper from "@/components/theme/ThemeWrapper";
-import LandingPage from "@/components/layout/LandingPage";
 import { Toaster } from "react-hot-toast";
 
 const clerkPublishableKey =
@@ -46,18 +45,10 @@ export default function RootLayout({
               enableSystem
               disableTransitionOnChange
             >
-              {/* Authenticated users see the app shell */}
-              <SignedIn>
-                <div className="min-h-screen flex flex-col">
-                  <Navbar />
-                  <main className="flex-1">{children}</main>
-                </div>
-              </SignedIn>
-
-              {/* Unauthenticated visitors see the public landing page */}
-              <SignedOut>
-                <LandingPage />
-              </SignedOut>
+              <div className="min-h-screen flex flex-col">
+                <Navbar />
+                <main className="flex-1">{children}</main>
+              </div>
 
               <Toaster
                 toastOptions={{

@@ -10,6 +10,8 @@ import { useRouter } from "next/navigation";
 import StartMeetingModal from "@/components/meeting/StartMeetingModal";
 import Loader from "@/components/common/Loader";
 import CandidateDashboard from "@/components/dashboard/CandidateDashboard";
+import LandingPage from "@/components/layout/LandingPage";
+import { SignedIn, SignedOut } from "@clerk/nextjs";
 
 export default function Home() {
   const routerInstance = useRouter();
@@ -34,47 +36,49 @@ export default function Home() {
     }
   };
 
-  if (isRoleLoading) {
-    return <Loader />;
-  }
-
-  // Candidate View: Render the full Stitch UI Candidate Dashboard
-  if (!isInterviewer) {
-    return (
-      <div className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
-        <CandidateDashboard meetings={candidateMeetings} />
-      </div>
-    );
-  }
-
-  // Interviewer View: Render Interviewer Actions & Workspace
   return (
-    <div className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 space-y-8">
-      <div className="glass-card rounded-xl p-6 border shadow-sm">
-        <h1 className="text-3xl font-bold font-heading text-primary">
-          Welcome back, Interviewer.
-        </h1>
-        <p className="text-muted-foreground text-sm mt-1">
-          Manage your interview sessions, start live calls, and review candidate evaluations.
-        </p>
-      </div>
+    <>
+      <SignedOut>
+        <LandingPage />
+      </SignedOut>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {MENU_ACTIONS.map((action) => (
-          <ActionButton
-            key={action.title}
-            item={action}
-            onPress={() => handleMenuAction(action.title)}
-          />
-        ))}
-      </div>
+      <SignedIn>
+        {isRoleLoading ? (
+          <Loader />
+        ) : isInterviewer ? (
+          <div className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 space-y-8">
+            <div className="glass-card rounded-xl p-6 border shadow-sm">
+              <h1 className="text-3xl font-bold font-heading text-primary">
+                Welcome back, Interviewer.
+              </h1>
+              <p className="text-muted-foreground text-sm mt-1">
+                Manage your interview sessions, start live calls, and review candidate evaluations.
+              </p>
+            </div>
 
-      <StartMeetingModal
-        isOpen={modalVisible}
-        onClose={() => setModalVisible(false)}
-        title={actionType === "join" ? "Join Meeting" : "Start Meeting"}
-        isJoinMeeting={actionType === "join"}
-      />
-    </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {MENU_ACTIONS.map((action) => (
+                <ActionButton
+                  key={action.title}
+                  item={action}
+                  onPress={() => handleMenuAction(action.title)}
+                />
+              ))}
+            </div>
+
+            <StartMeetingModal
+              isOpen={modalVisible}
+              onClose={() => setModalVisible(false)}
+              title={actionType === "join" ? "Join Meeting" : "Start Meeting"}
+              isJoinMeeting={actionType === "join"}
+            />
+          </div>
+        ) : (
+          <div className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+            <CandidateDashboard meetings={candidateMeetings} />
+          </div>
+        )}
+      </SignedIn>
+    </>
   );
 }
