@@ -24,17 +24,17 @@
   }
 
   .glass-card {
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(12px);
     border: 1px solid var(--border);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
   }
 
   .dark .glass-card {
-    background: rgba(15, 23, 42, 0.85);
-    backdrop-filter: blur(8px);
+    background: rgba(9, 13, 22, 0.85);
+    backdrop-filter: blur(12px);
     border: 1px solid var(--border);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
   }
 }
 
@@ -106,32 +106,32 @@
   }
 
   .dark {
-    --background: 222 47% 11%;       /* #0F172A */
+    --background: 224 71% 4%;        /* #030712 — sleek rich dark slate/black */
     --foreground: 210 40% 98%;
 
-    --card: 222 47% 14%;
+    --card: 222 47% 9%;              /* #090d16 */
     --card-foreground: 210 40% 98%;
 
-    --popover: 222 47% 14%;
+    --popover: 222 47% 9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 222 68% 75%;          /* #bac6ec */
-    --primary-foreground: 222 44% 9%;
+    --primary: 191 100% 50%;          /* Electric Cyan accent in dark mode */
+    --primary-foreground: 222 47% 4%;
 
     --secondary: 191 100% 50%;       /* #00d2fd */
-    --secondary-foreground: 196 100% 8%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 222 47% 18%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 222 47% 12%;
+    --muted-foreground: 215 20% 75%;  /* Crisp readable light slate text */
 
-    --accent: 222 47% 18%;
+    --accent: 222 47% 15%;
     --accent-foreground: 210 40% 98%;
 
-    --destructive: 0 63% 31%;
+    --destructive: 0 63% 40%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 222 47% 22%;
-    --input: 222 47% 22%;
+    --border: 222 30% 18%;
+    --input: 222 30% 18%;
     --ring: 191 100% 50%;
   }
 }
