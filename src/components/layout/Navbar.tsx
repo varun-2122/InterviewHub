@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "../theme/ThemeToggle";
-import { SignedIn, UserButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import DashboardLink from "./DashboardLink";
-import { Bell, Settings } from "lucide-react";
+import { Bell, Settings, ArrowRight } from "lucide-react";
 
 // Top Navigation bar matching Stitch UI design system
 export function Navbar() {
@@ -30,24 +30,26 @@ export function Navbar() {
             <span>InterviewHub</span>
           </Link>
 
-          <div className="hidden md:flex items-center gap-6 text-sm font-medium">
-            {navLinks.map((link) => {
-              const isActive = pathname === link.href;
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`transition-colors pb-1 ${
-                    isActive
-                      ? "text-primary font-bold border-b-2 border-primary"
-                      : "text-muted-foreground hover:text-primary"
-                  }`}
-                >
-                  {link.name}
-                </Link>
-              );
-            })}
-          </div>
+          <SignedIn>
+            <div className="hidden md:flex items-center gap-6 text-sm font-medium">
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`transition-colors pb-1 ${
+                      isActive
+                        ? "text-primary font-bold border-b-2 border-primary"
+                        : "text-muted-foreground hover:text-primary"
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                );
+              })}
+            </div>
+          </SignedIn>
         </div>
 
         <SignedIn>
@@ -75,6 +77,25 @@ export function Navbar() {
             />
           </div>
         </SignedIn>
+
+        <SignedOut>
+          <div className="flex items-center gap-3">
+            <ThemeToggle />
+            <Link
+              href="/sign-in"
+              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-3 py-1.5"
+            >
+              Sign in
+            </Link>
+            <Link
+              href="/sign-up"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold bg-primary text-primary-foreground px-4 py-2 rounded hover:opacity-90 transition-opacity shadow-sm"
+            >
+              Get Started
+              <ArrowRight className="size-3.5" />
+            </Link>
+          </div>
+        </SignedOut>
       </div>
     </nav>
   );

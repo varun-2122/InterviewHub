@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Terminal, Code2, Video, BarChart3, ArrowRight, CheckCircle } from "lucide-react";
 
-// Public landing page for unauthenticated visitors.
+// Public landing page content for unauthenticated visitors.
 // Design follows the Stitch "Synthetic Intelligence Recruitment Interface" spec:
 // - Hero with headline + CTA
 // - Feature cards: Live Coding, AI Behavioral, Readiness Score (as previews)
@@ -9,39 +9,8 @@ import { Terminal, Code2, Video, BarChart3, ArrowRight, CheckCircle } from "luci
 export function LandingPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* ── Navbar ─────────────────────────────────────────── */}
-      <header className="border-b border-border/60 bg-background/95 backdrop-blur-sm sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
-          <Link
-            href="/"
-            className="flex items-center gap-2 font-semibold text-lg font-heading tracking-tight hover:opacity-80 transition-opacity"
-          >
-            <div className="size-7 rounded bg-primary flex items-center justify-center">
-              <Terminal className="size-4 text-primary-foreground" />
-            </div>
-            <span className="text-foreground">InterviewHub</span>
-          </Link>
-
-          <div className="flex items-center gap-3">
-            <Link
-              href="/sign-in"
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Sign in
-            </Link>
-            <Link
-              href="/sign-up"
-              className="inline-flex items-center gap-1.5 text-sm font-semibold bg-primary text-primary-foreground px-4 py-2 rounded hover:opacity-90 transition-opacity"
-            >
-              Get Started
-              <ArrowRight className="size-3.5" />
-            </Link>
-          </div>
-        </div>
-      </header>
-
       {/* ── Hero ────────────────────────────────────────────── */}
-      <section className="max-w-6xl mx-auto px-6 pt-20 pb-16">
+      <section className="max-w-6xl mx-auto px-6 pt-12 pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left: Text */}
           <div className="space-y-6">
@@ -63,7 +32,7 @@ export function LandingPage() {
             <div className="flex flex-col sm:flex-row gap-3 pt-2">
               <Link
                 href="/sign-up"
-                className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground text-sm font-semibold px-6 py-3 rounded hover:opacity-90 transition-opacity"
+                className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground text-sm font-semibold px-6 py-3 rounded hover:opacity-90 transition-opacity shadow-sm"
               >
                 GET STARTED
                 <ArrowRight className="size-4" />
@@ -136,7 +105,7 @@ export function LandingPage() {
             </div>
           </div>
 
-          {/* Card 2 — AI Behavioral (design preview, not yet in backend) */}
+          {/* Card 2 — AI Behavioral */}
           <div className="border border-secondary/30 bg-gradient-to-b from-primary/90 to-primary rounded-lg p-6 space-y-4 shadow-sm">
             <div className="flex items-center gap-2">
               <BarChart3 className="size-5 text-secondary" />
@@ -153,7 +122,7 @@ export function LandingPage() {
             </div>
           </div>
 
-          {/* Card 3 — Readiness Score (design preview) */}
+          {/* Card 3 — Readiness Score */}
           <div className="border border-border bg-card rounded-lg p-6 space-y-4 shadow-sm hover:shadow transition-shadow">
             <div className="flex items-center gap-2">
               <BarChart3 className="size-5 text-primary" />
@@ -227,7 +196,7 @@ export function LandingPage() {
           </p>
           <Link
             href="/sign-up"
-            className="inline-flex items-center gap-2 bg-primary text-primary-foreground text-sm font-semibold px-8 py-3 rounded hover:opacity-90 transition-opacity"
+            className="inline-flex items-center gap-2 bg-primary text-primary-foreground text-sm font-semibold px-8 py-3 rounded hover:opacity-90 transition-opacity shadow-sm"
           >
             GET STARTED
             <ArrowRight className="size-4" />
