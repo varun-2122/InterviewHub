@@ -77,3 +77,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-06-24 17:50 - fix: patch security headers in middleware
 
 ### 2026-06-25 18:19 - feat: add interview feedback templates
+
+### 2026-06-27 12:54 - docs: add environment variable guide
