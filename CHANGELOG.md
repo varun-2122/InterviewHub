@@ -81,3 +81,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-06-27 12:54 - docs: add environment variable guide
 
 ### 2026-06-28 14:40 - style: improve accessibility contrast ratios
+
+### 2026-06-28 18:23 - style: add micro-animations to buttons
