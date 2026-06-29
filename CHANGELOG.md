@@ -85,3 +85,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-06-28 18:23 - style: add micro-animations to buttons
 
 ### 2026-06-28 20:47 - fix: resolve state management race condition
+
+### 2026-06-29 13:09 - docs: update deployment instructions
