@@ -89,3 +89,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-06-29 13:09 - docs: update deployment instructions
 
 ### 2026-06-29 22:43 - feat: add question bank management page
+
+### 2026-06-30 15:38 - fix: handle null pointer exceptions safely
