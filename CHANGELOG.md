@@ -95,3 +95,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-06-30 18:12 - feat: add readiness score indicator
 
 ### 2026-06-30 20:13 - feat: add interview scheduling component
+
+### 2026-07-01 18:38 - feat: add interview timer component
