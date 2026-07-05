@@ -103,3 +103,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-07-02 14:17 - docs: update README with features list
 
 ### 2026-07-02 20:38 - fix: resolve video call connection issues
+
+### 2026-07-05 14:11 - style: animate hero section on load
