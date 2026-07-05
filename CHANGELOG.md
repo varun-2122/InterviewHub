@@ -107,3 +107,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-07-05 14:11 - style: animate hero section on load
 
 ### 2026-07-05 16:26 - feat: implement feedback collection form
+
+### 2026-07-05 19:40 - style: improve button hover effects
