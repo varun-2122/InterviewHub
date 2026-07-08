@@ -111,3 +111,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-07-05 19:40 - style: improve button hover effects
 
 ### 2026-07-07 13:19 - refactor: optimize bundle size
+
+### 2026-07-08 10:50 - fix: correct interview status transitions
