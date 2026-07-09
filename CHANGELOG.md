@@ -113,3 +113,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-07-07 13:19 - refactor: optimize bundle size
 
 ### 2026-07-08 10:50 - fix: correct interview status transitions
+
+### 2026-07-09 12:27 - refactor: improve TypeScript strict types
