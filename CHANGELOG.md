@@ -123,3 +123,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-07-11 20:02 - feat: add AI response analysis feature
 
 ### 2026-07-11 21:24 - refactor: clean up component structure
+
+### 2026-07-12 17:57 - style: improve mobile responsiveness
