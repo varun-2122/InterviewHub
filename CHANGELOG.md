@@ -127,3 +127,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-07-12 17:57 - style: improve mobile responsiveness
 
 ### 2026-07-13 12:09 - style: update typography scale globally
+
+### 2026-07-14 13:15 - style: add loading skeleton components
