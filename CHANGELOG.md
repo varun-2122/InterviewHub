@@ -131,3 +131,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-07-14 13:15 - style: add loading skeleton components
 
 ### 2026-07-15 15:30 - feat: add candidate onboarding flow
+
+### 2026-07-15 17:38 - refactor: optimize database queries
