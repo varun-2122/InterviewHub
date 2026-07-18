@@ -137,3 +137,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-07-16 17:12 - feat: add session replay functionality
 
 ### 2026-07-16 19:16 - fix: resolve authentication token expiry
+
+### 2026-07-18 18:12 - style: enhance navbar responsiveness
