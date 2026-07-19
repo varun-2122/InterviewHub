@@ -141,3 +141,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-07-18 18:12 - style: enhance navbar responsiveness
 
 ### 2026-07-19 14:48 - fix: resolve dark mode flicker on load
+
+### 2026-07-19 18:24 - feat: add email notification system
