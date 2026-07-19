@@ -139,3 +139,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-07-16 19:16 - fix: resolve authentication token expiry
 
 ### 2026-07-18 18:12 - style: enhance navbar responsiveness
+
+### 2026-07-19 14:48 - fix: resolve dark mode flicker on load
