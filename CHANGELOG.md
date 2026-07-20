@@ -147,3 +147,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-07-19 21:07 - fix: resolve date timezone issues
 
 ### 2026-07-20 14:55 - refactor: extract reusable custom hooks
+
+### 2026-07-20 18:43 - docs: update API documentation
