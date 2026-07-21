@@ -153,3 +153,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-07-20 19:56 - feat: add candidate scoring system
 
 ### 2026-07-21 10:43 - feat: add recruiter dashboard analytics
+
+### 2026-07-21 10:19 - fix: improve WebRTC connection stability
