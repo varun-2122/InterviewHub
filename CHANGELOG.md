@@ -155,3 +155,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-07-21 10:43 - feat: add recruiter dashboard analytics
 
 ### 2026-07-21 10:19 - fix: improve WebRTC connection stability
+
+### 2026-07-23 17:44 - fix: resolve Convex mutation error handling
