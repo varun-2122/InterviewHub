@@ -157,3 +157,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-07-21 10:19 - fix: improve WebRTC connection stability
 
 ### 2026-07-23 17:44 - fix: resolve Convex mutation error handling
+
+### 2026-07-24 10:10 - fix: handle expired interview links
