@@ -163,3 +163,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-07-25 15:34 - feat: add live coding environment
 
 ### 2026-07-25 21:21 - fix: resolve build warnings and lint errors
+
+### 2026-07-27 15:38 - fix: handle concurrent session conflicts
