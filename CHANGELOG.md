@@ -167,3 +167,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-07-27 15:38 - fix: handle concurrent session conflicts
 
 ### 2026-07-28 09:12 - feat: add candidate search and filter
+
+### 2026-07-28 10:25 - style: enhance dashboard grid layout
