@@ -169,3 +169,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-07-28 09:12 - feat: add candidate search and filter
 
 ### 2026-07-28 10:25 - style: enhance dashboard grid layout
+
+### 2026-07-28 17:21 - feat: add AI proctoring module
