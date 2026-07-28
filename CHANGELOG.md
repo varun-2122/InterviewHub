@@ -165,3 +165,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-07-25 21:21 - fix: resolve build warnings and lint errors
 
 ### 2026-07-27 15:38 - fix: handle concurrent session conflicts
+
+### 2026-07-28 09:12 - feat: add candidate search and filter
