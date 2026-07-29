@@ -171,3 +171,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-07-28 10:25 - style: enhance dashboard grid layout
 
 ### 2026-07-28 17:21 - feat: add AI proctoring module
+
+### 2026-07-29 10:33 - fix: resolve WebSocket reconnection logic
