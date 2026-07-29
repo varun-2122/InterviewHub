@@ -173,3 +173,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-07-28 17:21 - feat: add AI proctoring module
 
 ### 2026-07-29 10:33 - fix: resolve WebSocket reconnection logic
+
+### 2026-07-29 11:28 - refactor: modularize API endpoint handlers
