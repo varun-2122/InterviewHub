@@ -175,3 +175,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-07-29 10:33 - fix: resolve WebSocket reconnection logic
 
 ### 2026-07-29 11:28 - refactor: modularize API endpoint handlers
+
+### 2026-07-29 17:15 - feat: add interview result export feature
