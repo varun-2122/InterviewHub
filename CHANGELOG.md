@@ -177,3 +177,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-07-29 11:28 - refactor: modularize API endpoint handlers
 
 ### 2026-07-29 17:15 - feat: add interview result export feature
+
+### 2026-07-30 20:05 - feat: add behavioral interview module
