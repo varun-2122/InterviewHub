@@ -179,3 +179,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-07-29 17:15 - feat: add interview result export feature
 
 ### 2026-07-30 20:05 - feat: add behavioral interview module
+
+### 2026-07-31 09:08 - feat: implement role-based access control
