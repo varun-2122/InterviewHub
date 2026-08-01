@@ -181,3 +181,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-07-30 20:05 - feat: add behavioral interview module
 
 ### 2026-07-31 09:08 - feat: implement role-based access control
+
+### 2026-08-01 18:21 - fix: handle edge cases in code editor
