@@ -185,3 +185,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-08-01 18:21 - fix: handle edge cases in code editor
 
 ### 2026-08-01 20:22 - fix: improve error handling in forms
+
+### 2026-08-02 15:11 - feat: integrate Clerk authentication
