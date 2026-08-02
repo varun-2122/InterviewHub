@@ -187,3 +187,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-08-01 20:22 - fix: improve error handling in forms
 
 ### 2026-08-02 15:11 - feat: integrate Clerk authentication
+
+### 2026-08-02 18:14 - docs: add API endpoint documentation
