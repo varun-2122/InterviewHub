@@ -189,3 +189,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-08-02 15:11 - feat: integrate Clerk authentication
 
 ### 2026-08-02 18:14 - docs: add API endpoint documentation
+
+### 2026-08-02 20:32 - fix: resolve Monaco editor layout bug
