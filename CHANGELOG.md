@@ -191,3 +191,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-08-02 18:14 - docs: add API endpoint documentation
 
 ### 2026-08-02 20:32 - fix: resolve Monaco editor layout bug
+
+### 2026-08-03 11:44 - style: improve candidate profile UI
