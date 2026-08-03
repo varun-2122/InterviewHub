@@ -193,3 +193,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-08-02 20:32 - fix: resolve Monaco editor layout bug
 
 ### 2026-08-03 11:44 - style: improve candidate profile UI
+
+### 2026-08-03 13:12 - style: update color palette for dark mode
