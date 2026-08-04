@@ -197,3 +197,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-08-03 13:12 - style: update color palette for dark mode
 
 ### 2026-08-04 12:39 - style: polish landing page hero section
+
+### 2026-08-04 18:33 - style: add glassmorphism card effects
