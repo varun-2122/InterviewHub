@@ -201,3 +201,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-08-04 18:33 - style: add glassmorphism card effects
 
 ### 2026-08-05 10:44 - fix: resolve CORS issues in API layer
+
+### 2026-08-06 09:50 - fix: resolve hydration errors in Next.js
