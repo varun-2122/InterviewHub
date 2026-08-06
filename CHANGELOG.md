@@ -203,3 +203,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-08-05 10:44 - fix: resolve CORS issues in API layer
 
 ### 2026-08-06 09:50 - fix: resolve hydration errors in Next.js
+
+### 2026-08-06 16:39 - style: polish recruiter dashboard cards
