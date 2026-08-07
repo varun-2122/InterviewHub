@@ -207,3 +207,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-08-06 16:39 - style: polish recruiter dashboard cards
 
 ### 2026-08-07 13:29 - feat: implement code syntax highlighting
+
+### 2026-08-07 17:59 - feat: add proctor signal clarity monitor
