@@ -205,3 +205,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-08-06 09:50 - fix: resolve hydration errors in Next.js
 
 ### 2026-08-06 16:39 - style: polish recruiter dashboard cards
+
+### 2026-08-07 13:29 - feat: implement code syntax highlighting
