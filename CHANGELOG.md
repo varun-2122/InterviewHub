@@ -211,3 +211,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-08-07 17:59 - feat: add proctor signal clarity monitor
 
 ### 2026-08-08 15:19 - fix: resolve memory leaks in video stream
+
+### 2026-08-08 18:05 - docs: add contribution guidelines
