@@ -215,3 +215,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-08-08 18:05 - docs: add contribution guidelines
 
 ### 2026-08-09 14:56 - docs: document Convex database schema
+
+### 2026-08-09 20:52 - refactor: separate layout and page logic
