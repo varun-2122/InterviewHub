@@ -4,13 +4,16 @@ import { api } from "../../convex/_generated/api";
 
 // Validates the database role of the current Clerk-authenticated session
 export const useRoleCheck = () => {
-  const { user: clerkUser } = useUser();
+  const { user: clerkUser, isLoaded: isClerkLoaded } = useUser();
 
-  const userAccount = useQuery(api.accounts.fetchProfileByClerkId, {
-    clerkId: clerkUser?.id || "",
-  });
+  // Skip the Convex query until Clerk has fully hydrated — prevents firing
+  // with clerkId:"" on reload, which returns null and breaks the loading state
+  const userAccount = useQuery(
+    api.accounts.fetchProfileByClerkId,
+    isClerkLoaded && clerkUser?.id ? { clerkId: clerkUser.id } : "skip"
+  );
 
-  const isRoleLoading = userAccount === undefined;
+  const isRoleLoading = !isClerkLoaded || userAccount === undefined;
 
   return {
     isRoleLoading,
@@ -20,3 +23,4 @@ export const useRoleCheck = () => {
 };
 
 export default useRoleCheck;
+

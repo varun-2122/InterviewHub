@@ -22,7 +22,7 @@ function SchedulePage() {
   }
 
   if (!isInterviewer) {
-    return <Loader />;
+    return null;
   }
 
   return <InterviewScheduleUI />;
