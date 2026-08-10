@@ -86,9 +86,9 @@ $commitMessages = @(
     "feat: add interview feedback templates"
 )
 
-# Date range: April 26 to June 23, 2026
-$startDate = [datetime]"2026-04-26"
-$endDate   = [datetime]"2026-06-23"
+# Date range: June 24 to August 20, 2026
+$startDate = [datetime]"2026-06-24"
+$endDate   = [datetime]"2026-08-20"
 
 # Create/init CHANGELOG.md if missing
 $changelogPath = "$repoPath\CHANGELOG.md"

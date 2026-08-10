@@ -1,7 +1,7 @@
 import { v } from "convex/values";
-import { action, mutation } from "./_generated/server";
-import { requireAuth } from "./lib";
-import { api } from "./_generated/api";
+import { action, internalMutation } from "./_generated/server";
+import { requireAuthAction } from "./lib";
+import { internal } from "./_generated/api";
 
 const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
 
@@ -11,7 +11,7 @@ export const generateBehavioralAnalysis = action({
     notes: v.string(), // Evaluator's raw notes to analyze
   },
   handler: async (ctx, args) => {
-    await requireAuth(ctx);
+    await requireAuthAction(ctx);
     
     // In a real production setting, you would retrieve the actual transcript
     // from Stream Video recordings. For this MVP, we analyze the interviewer's notes.
@@ -52,8 +52,8 @@ export const generateBehavioralAnalysis = action({
         throw new Error("AI returned an empty response.");
       }
 
-      // Persist the feedback
-      await ctx.runMutation(api.aiAnalysis.saveAiFeedback, {
+      // Persist the feedback using an internal mutation (server-to-server call)
+      await ctx.runMutation(internal.aiAnalysis.saveAiFeedback, {
         interviewId: args.interviewId,
         feedback: aiFeedback,
       });
@@ -66,13 +66,13 @@ export const generateBehavioralAnalysis = action({
   },
 });
 
-export const saveAiFeedback = mutation({
+// Internal mutation — only callable from Convex actions/mutations, not from clients
+export const saveAiFeedback = internalMutation({
   args: {
     interviewId: v.id("interviews"),
     feedback: v.string(),
   },
   handler: async (ctx, args) => {
-    await requireAuth(ctx);
     return await ctx.db.patch(args.interviewId, { aiFeedback: args.feedback });
   },
 });

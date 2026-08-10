@@ -1,4 +1,4 @@
-import { QueryCtx, MutationCtx } from "./_generated/server";
+import { QueryCtx, MutationCtx, ActionCtx } from "./_generated/server";
 
 /**
  * Shared authorization helpers for Convex query and mutation handlers.
@@ -9,6 +9,18 @@ import { QueryCtx, MutationCtx } from "./_generated/server";
 
 /** Requires an authenticated Clerk session. Returns the identity or throws. */
 export async function requireAuth(ctx: QueryCtx | MutationCtx) {
+  const identity = await ctx.auth.getUserIdentity();
+  if (!identity) {
+    throw new Error("Unauthorized: Authentication is required.");
+  }
+  return identity;
+}
+
+/**
+ * Same as requireAuth but accepts an ActionCtx.
+ * Convex actions do not have a `.db` property, so a separate helper is needed.
+ */
+export async function requireAuthAction(ctx: ActionCtx) {
   const identity = await ctx.auth.getUserIdentity();
   if (!identity) {
     throw new Error("Unauthorized: Authentication is required.");

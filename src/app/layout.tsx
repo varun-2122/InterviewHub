@@ -7,14 +7,31 @@ import Navbar from "@/components/layout/Navbar";
 import ThemeWrapper from "@/components/theme/ThemeWrapper";
 import { Toaster } from "react-hot-toast";
 
+// Force all pages in this layout to be dynamically rendered at request time.
+// This prevents Next.js from attempting to pre-render Clerk-wrapped pages
+// at build time, which fails when NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY is absent.
+export const dynamic = "force-dynamic";
+
 const clerkPublishableKey =
-  process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY ||
-  "pk_test_placeholder_for_ci_build";
+  process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || "";
 
 export const metadata: Metadata = {
   title: "InterviewHub — Precision Recruitment System",
   description:
     "High-signal, low-noise assessment environments designed for top technical talent. Prepare, practice, and prove your skills.",
+  keywords: ["technical interview", "coding assessment", "recruitment", "pair programming", "webRTC", "live code sync"],
+  authors: [{ name: "Varun Dixit" }],
+  openGraph: {
+    title: "InterviewHub — Collaborative Technical Interviews",
+    description: "Real-time coding environments for technical assessments.",
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "InterviewHub",
+    description: "The next-generation technical interview platform.",
+  },
 };
 
 export default function RootLayout({

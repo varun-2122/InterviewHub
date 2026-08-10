@@ -49,6 +49,7 @@ export const fetchMeetingByCallId = query({
       .withIndex("by_stream_call_id", (q) =>
         q.eq("streamCallId", args.streamCallId)
       )
+      .first();
   },
 });
 
@@ -175,8 +176,11 @@ export const changeMeetingStatus = mutation({
       throw new Error("Forbidden: You are not assigned to this interview.");
     }
 
-    const changes: { status: string; endTime?: number } = {
-      status: args.status,
+    // Cast is safe — runtime validation above already rejected any unlisted value
+    const validatedStatus = args.status as "upcoming" | "completed" | "succeeded" | "failed";
+
+    const changes: { status: "upcoming" | "completed" | "succeeded" | "failed"; endTime?: number } = {
+      status: validatedStatus,
     };
 
     if (args.status === "completed") {

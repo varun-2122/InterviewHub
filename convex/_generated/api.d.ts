@@ -14,6 +14,9 @@ import type {
   FunctionReference,
 } from "convex/server";
 import type * as accounts from "../accounts.js";
+import type * as aiAnalysis from "../aiAnalysis.js";
+import type * as codeExecution from "../codeExecution.js";
+import type * as codeSync from "../codeSync.js";
 import type * as meetings from "../meetings.js";
 import type * as notes from "../notes.js";
 import type * as webhooks from "../webhooks.js";
@@ -28,6 +31,9 @@ import type * as webhooks from "../webhooks.js";
  */
 declare const fullApi: ApiFromModules<{
   accounts: typeof accounts;
+  aiAnalysis: typeof aiAnalysis;
+  codeExecution: typeof codeExecution;
+  codeSync: typeof codeSync;
   meetings: typeof meetings;
   notes: typeof notes;
   webhooks: typeof webhooks;

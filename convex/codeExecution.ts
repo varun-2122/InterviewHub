@@ -1,6 +1,6 @@
 import { v } from "convex/values";
 import { action } from "./_generated/server";
-import { requireAuth } from "./lib";
+import { requireAuthAction } from "./lib";
 
 const PISTON_API_URL = "https://emkc.org/api/v2/piston";
 
@@ -16,7 +16,7 @@ export const executeCode = action({
     code: v.string(),
   },
   handler: async (ctx, args) => {
-    await requireAuth(ctx);
+    await requireAuthAction(ctx);
 
     const version = LANGUAGE_VERSIONS[args.language];
     if (!version) {
