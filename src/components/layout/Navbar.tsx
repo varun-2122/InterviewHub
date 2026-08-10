@@ -28,7 +28,7 @@ export function Navbar() {
             <div className="size-7 sm:size-8 rounded bg-primary flex items-center justify-center text-primary-foreground font-extrabold text-xs sm:text-sm shrink-0">
               IH
             </div>
-            <span className="truncate max-w-[120px] xs:max-w-none">InterviewHub</span>
+            <span>InterviewHub</span>
           </Link>
 
           <SignedIn>
