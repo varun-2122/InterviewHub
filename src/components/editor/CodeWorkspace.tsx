@@ -16,11 +16,12 @@ import {
   SelectValue,
 } from "../ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { AlertCircle, FileText, Radio, Sparkles } from "lucide-react";
+import { AlertCircle, FileText, Play, Radio, Sparkles, Terminal } from "lucide-react";
 import Editor from "@monaco-editor/react";
-import { useMutation, useQuery } from "convex/react";
+import { useAction, useMutation, useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { useUser } from "@clerk/nextjs";
+import toast from "react-hot-toast";
 
 type SupportedLanguage = "javascript" | "python" | "java";
 
@@ -56,6 +57,9 @@ export function CodeWorkspace({ callId }: CodeWorkspaceProps) {
   const [codeContent, setCodeContent] = useState(
     currentChallenge.templates[EDITOR_LANGUAGES[0].id]
   );
+  
+  const [isRunning, setIsRunning] = useState(false);
+  const [output, setOutput] = useState("");
 
   // Track whether the most recent content change originated locally so we can
   // skip applying our own echo back from Convex (prevents cursor jumping).
@@ -67,6 +71,7 @@ export function CodeWorkspace({ callId }: CodeWorkspaceProps) {
     callId ? { callId } : "skip"
   );
   const upsertEditorState = useMutation(api.codeSync.upsertEditorState);
+  const executeCode = useAction(api.codeExecution.executeCode);
 
   // Apply incoming remote state changes.
   // Skip if `lastUpdatedBy` matches our own Clerk ID — that's our own echo.
@@ -143,6 +148,30 @@ export function CodeWorkspace({ callId }: CodeWorkspaceProps) {
     },
     [currentLanguage, currentChallenge, pushToConvex]
   );
+
+  const handleRunCode = async () => {
+    setIsRunning(true);
+    setOutput("Executing code...");
+    try {
+      const result = await executeCode({
+        language: currentLanguage,
+        code: codeContent,
+      });
+
+      if (result.run && result.run.output) {
+        setOutput(result.run.output);
+      } else if (result.compile && result.compile.output) {
+        setOutput(`Compilation Error:\n${result.compile.output}`);
+      } else {
+        setOutput("Program exited with no output.");
+      }
+    } catch (err: any) {
+      setOutput(`Error: ${err.message || "Failed to execute code"}`);
+      toast.error("Execution failed");
+    } finally {
+      setIsRunning(false);
+    }
+  };
 
   const isLive = !!callId;
 
@@ -282,30 +311,66 @@ export function CodeWorkspace({ callId }: CodeWorkspaceProps) {
       <ResizableHandle withHandle className="bg-border/60 hover:bg-primary/50 transition-colors" />
 
       <ResizablePanel defaultSize={50} minSize={30}>
-        <div className="h-full w-full relative">
-          {/* Use `language` (not `defaultLanguage`) so Monaco re-highlights when
-              the user switches languages from the dropdown. Track the current
-              value explicitly so the editor stays in sync. */}
-          <Editor
-            height="100%"
-            language={currentLanguage}
-            theme="vs-dark"
-            value={codeContent}
-            onChange={handleEditorChange}
-            options={{
-              minimap: { enabled: false },
-              fontSize: 14,
-              fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
-              lineNumbers: "on",
-              scrollBeyondLastLine: false,
-              automaticLayout: true,
-              padding: { top: 12, bottom: 12 },
-              wordWrap: "on",
-              wrappingIndent: "indent",
-              tabSize: 2,
-            }}
-          />
-        </div>
+        <ResizablePanelGroup direction="vertical">
+          <ResizablePanel defaultSize={70} minSize={30}>
+            <div className="h-full w-full relative flex flex-col">
+              <div className="flex justify-end p-2 bg-muted/20 border-b">
+                <Button 
+                  size="sm" 
+                  onClick={handleRunCode} 
+                  disabled={isRunning}
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm"
+                >
+                  <Play className="h-4 w-4 mr-2" />
+                  {isRunning ? "Running..." : "Run Code"}
+                </Button>
+              </div>
+              <div className="flex-1">
+                {/* Use `language` (not `defaultLanguage`) so Monaco re-highlights when
+                    the user switches languages from the dropdown. Track the current
+                    value explicitly so the editor stays in sync. */}
+                <Editor
+                  height="100%"
+                  language={currentLanguage}
+                  theme="vs-dark"
+                  value={codeContent}
+                  onChange={handleEditorChange}
+                  options={{
+                    minimap: { enabled: false },
+                    fontSize: 14,
+                    fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+                    lineNumbers: "on",
+                    scrollBeyondLastLine: false,
+                    automaticLayout: true,
+                    padding: { top: 12, bottom: 12 },
+                    wordWrap: "on",
+                    wrappingIndent: "indent",
+                    tabSize: 2,
+                  }}
+                />
+              </div>
+            </div>
+          </ResizablePanel>
+          
+          <ResizableHandle withHandle className="bg-border/60 hover:bg-primary/50 transition-colors" />
+          
+          <ResizablePanel defaultSize={30} minSize={20}>
+            <div className="h-full flex flex-col bg-[#1e1e1e] border-t border-[#333]">
+              <div className="flex items-center px-4 py-2 border-b border-[#333] bg-[#252526]">
+                <Terminal className="h-4 w-4 mr-2 text-muted-foreground" />
+                <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                  Terminal Output
+                </span>
+              </div>
+              <ScrollArea className="flex-1 p-4">
+                <pre className="text-sm font-mono text-gray-300 whitespace-pre-wrap">
+                  {output || "Output will appear here..."}
+                </pre>
+                <ScrollBar />
+              </ScrollArea>
+            </div>
+          </ResizablePanel>
+        </ResizablePanelGroup>
       </ResizablePanel>
     </ResizablePanelGroup>
   );
