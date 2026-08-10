@@ -49,7 +49,15 @@ export const fetchMeetingByCallId = query({
       .withIndex("by_stream_call_id", (q) =>
         q.eq("streamCallId", args.streamCallId)
       )
-      .first();
+  },
+});
+
+// Retrieves single meeting document using Convex ID.
+export const fetchMeetingById = query({
+  args: { id: v.id("interviews") },
+  handler: async (ctx, args) => {
+    await requireAuth(ctx);
+    return await ctx.db.get(args.id);
   },
 });
 
