@@ -12,7 +12,7 @@ import { MEETING_STATUS_MAP } from "@/constants/sessionConfig";
 import { Badge } from "@/components/ui/badge";
 import { useRoleCheck } from "@/hooks/useRoleCheck";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   Card,
   CardContent,
@@ -26,6 +26,9 @@ import {
   CheckCircle,
   Clock,
   XCircle,
+  Users,
+  BriefcaseBusiness,
+  ShieldAlert,
 } from "lucide-react";
 import { format } from "date-fns";
 import FeedbackModal from "@/components/feedback/FeedbackModal";
@@ -46,6 +49,9 @@ function DashboardPage() {
   const accounts = useQuery(api.accounts.fetchAllProfiles);
   const meetings = useQuery(api.meetings.fetchMeetingsList);
   const transitionStatus = useMutation(api.meetings.changeMeetingStatus);
+  const updateUserRole = useMutation(api.accounts.updateUserRole);
+
+  const [activeView, setActiveView] = useState<"interviews" | "users">("interviews");
 
   if (isRoleLoading) return <Loader />;
   if (!isInterviewer) return null;
@@ -63,6 +69,17 @@ function DashboardPage() {
     }
   };
 
+  const handleRoleChange = async (userId: Id<"users">, currentRole: string) => {
+    try {
+      const newRole = currentRole === "candidate" ? "interviewer" : "candidate";
+      await updateUserRole({ userId, newRole });
+      toast.success(`User role updated to ${newRole}`);
+    } catch (err) {
+      console.error("Failed to update user role:", err);
+      toast.error("Failed to update user role");
+    }
+  };
+
   if (!meetings || !accounts) {
     return <Loader />;
   }
@@ -71,13 +88,32 @@ function DashboardPage() {
 
   return (
     <div className="container mx-auto py-10">
-      <div className="flex items-center mb-8">
+      <div className="flex items-center justify-between mb-8">
+        <div className="flex bg-muted p-1 rounded-lg">
+          <Button
+            variant={activeView === "interviews" ? "default" : "ghost"}
+            onClick={() => setActiveView("interviews")}
+            className="rounded-md"
+          >
+            <BriefcaseBusiness className="mr-2 h-4 w-4" />
+            Interviews
+          </Button>
+          <Button
+            variant={activeView === "users" ? "default" : "ghost"}
+            onClick={() => setActiveView("users")}
+            className="rounded-md"
+          >
+            <Users className="mr-2 h-4 w-4" />
+            User Management
+          </Button>
+        </div>
         <Link href="/schedule">
           <Button className="font-semibold">Schedule New Interview</Button>
         </Link>
       </div>
 
-      <div className="space-y-8">
+      {activeView === "interviews" ? (
+        <div className="space-y-8">
         {MEETING_STATUS_MAP.map(
           (category) =>
             (sortedGroups[category.id]?.length || 0) > 0 && (
@@ -170,6 +206,62 @@ function DashboardPage() {
             )
         )}
       </div>
+      ) : (
+        <div className="space-y-4">
+          <h2 className="text-xl font-bold tracking-tight mb-4">User Directory</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {accounts.map((user) => (
+              <Card key={user._id} className="hover:shadow-md transition-all border border-border">
+                <CardHeader className="p-4 border-b bg-muted/10">
+                  <div className="flex items-center gap-3">
+                    <Avatar className="h-10 w-10 ring-1 ring-border">
+                      <AvatarImage src={user.image} alt={user.name} />
+                      <AvatarFallback>
+                        {user.name?.substring(0, 2).toUpperCase() || "U"}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className="space-y-0.5">
+                      <CardTitle className="text-base font-semibold tracking-tight">
+                        {user.name}
+                      </CardTitle>
+                      <p className="text-xs text-muted-foreground line-clamp-1">
+                        {user.email}
+                      </p>
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent className="p-4 flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Badge variant={user.role === "interviewer" ? "default" : "secondary"}>
+                      {user.role}
+                    </Badge>
+                  </div>
+                </CardContent>
+                <CardFooter className="p-4 pt-0">
+                  <Button
+                    variant={user.role === "candidate" ? "default" : "destructive"}
+                    size="sm"
+                    className="w-full"
+                    onClick={() => handleRoleChange(user._id, user.role)}
+                  >
+                    {user.role === "candidate" ? (
+                      <>
+                        <ShieldAlert className="h-4 w-4 mr-2" />
+                        Promote to Interviewer
+                      </>
+                    ) : (
+                      <>
+                        <Users className="h-4 w-4 mr-2" />
+                        Demote to Candidate
+                      </>
+                    )}
+                  </Button>
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

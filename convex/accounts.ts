@@ -78,3 +78,16 @@ export const fetchProfileByClerkId = query({
     throw new Error("Forbidden: You may only view your own profile.");
   },
 });
+
+// Updates a user's role.
+// Only existing interviewers (admins) can perform this action.
+export const updateUserRole = mutation({
+  args: {
+    userId: v.id("users"),
+    newRole: v.union(v.literal("candidate"), v.literal("interviewer")),
+  },
+  handler: async (ctx, args) => {
+    await requireInterviewer(ctx);
+    return await ctx.db.patch(args.userId, { role: args.newRole });
+  },
+});
