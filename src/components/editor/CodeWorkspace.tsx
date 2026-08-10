@@ -99,6 +99,11 @@ export function CodeWorkspace({ callId }: CodeWorkspaceProps) {
 
     // Sync editor content
     setCodeContent(remoteState.content);
+
+    // Sync execution output
+    if (remoteState.executionOutput !== undefined) {
+      setOutput(remoteState.executionOutput);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [remoteState]);
 
@@ -158,16 +163,41 @@ export function CodeWorkspace({ callId }: CodeWorkspaceProps) {
         code: codeContent,
       });
 
+      let newOutput = "";
       if (result.run && result.run.output) {
-        setOutput(result.run.output);
+        newOutput = result.run.output;
       } else if (result.compile && result.compile.output) {
-        setOutput(`Compilation Error:\n${result.compile.output}`);
+        newOutput = `Compilation Error:\n${result.compile.output}`;
       } else {
-        setOutput("Program exited with no output.");
+        newOutput = "Program exited with no output.";
+      }
+
+      setOutput(newOutput);
+
+      // Sync the execution output to the room
+      if (callId && clerkUser) {
+        upsertEditorState({
+          callId,
+          content: codeContent,
+          language: currentLanguage,
+          challengeId: currentChallenge.id,
+          executionOutput: newOutput,
+        }).catch((err) => console.error("Failed to sync execution output:", err));
       }
     } catch (err: any) {
-      setOutput(`Error: ${err.message || "Failed to execute code"}`);
+      const errOutput = `Error: ${err.message || "Failed to execute code"}`;
+      setOutput(errOutput);
       toast.error("Execution failed");
+      
+      if (callId && clerkUser) {
+        upsertEditorState({
+          callId,
+          content: codeContent,
+          language: currentLanguage,
+          challengeId: currentChallenge.id,
+          executionOutput: errOutput,
+        }).catch(console.error);
+      }
     } finally {
       setIsRunning(false);
     }

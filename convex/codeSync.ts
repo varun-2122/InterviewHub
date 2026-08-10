@@ -31,6 +31,7 @@ export const upsertEditorState = mutation({
     content: v.string(),
     language: v.string(),
     challengeId: v.string(),
+    executionOutput: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     const identity = await requireAuth(ctx);
@@ -44,6 +45,7 @@ export const upsertEditorState = mutation({
       content: args.content,
       language: args.language,
       challengeId: args.challengeId,
+      executionOutput: args.executionOutput,
       lastUpdatedBy: identity.subject,
       updatedAt: Date.now(),
     };

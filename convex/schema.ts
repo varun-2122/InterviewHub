@@ -52,5 +52,6 @@ export default defineSchema({
     // Tracks who made the last update so clients can skip echoing their own writes
     lastUpdatedBy: v.optional(v.string()),
     updatedAt: v.optional(v.number()),
+    executionOutput: v.optional(v.string()),
   }).index("by_call_id", ["callId"]),
 });
