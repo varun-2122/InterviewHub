@@ -1,184 +1,73 @@
-﻿# Changelog
-
-All notable changes to InterviewHub will be documented in this file.
-
-
-### 2026-04-26 13:25 - fix: handle network disconnection gracefully
-
-### 2026-04-26 13:54 - style: update typography scale globally
-
-### 2026-04-26 20:46 - feat: add AI proctoring module
-
-### 2026-04-27 17:54 - fix: resolve CORS issues in API layer
-
-### 2026-04-27 18:33 - fix: handle edge cases in code editor
-
-### 2026-04-27 18:21 - fix: resolve Monaco editor layout bug
-
-### 2026-04-28 11:03 - feat: implement real-time collaboration
-
-### 2026-04-29 10:10 - docs: add API endpoint documentation
-
-### 2026-04-29 10:51 - docs: update deployment instructions
-
-### 2026-04-29 20:05 - feat: add interview timer component
-
-### 2026-05-02 16:40 - refactor: optimize database queries
-
-### 2026-05-03 18:25 - style: polish recruiter dashboard cards
-
-### 2026-05-04 16:48 - refactor: modularize API endpoint handlers
-
-### 2026-05-06 18:26 - refactor: clean up component structure
-
-### 2026-05-06 20:46 - feat: add interview scheduling component
-
-### 2026-05-07 10:00 - style: enhance navbar responsiveness
-
-### 2026-05-07 13:54 - fix: resolve date timezone issues
-
-### 2026-05-07 18:34 - fix: improve sign-in redirect flow
-
-### 2026-05-09 12:35 - docs: add setup instructions
-
-### 2026-05-09 16:09 - docs: update API documentation
-
-### 2026-05-10 10:02 - refactor: consolidate API utility functions
-
-### 2026-05-11 10:36 - fix: resolve hydration errors in Next.js
-
-### 2026-05-12 20:33 - style: add loading skeleton components
-
-### 2026-05-13 22:35 - feat: implement code syntax highlighting
-
-### 2026-05-14 10:36 - feat: add question bank management page
-
-### 2026-05-14 14:04 - fix: resolve WebSocket reconnection logic
-
-### 2026-05-17 19:14 - feat: add AI response analysis feature
-
-### 2026-05-18 09:53 - style: add glassmorphism card effects
-
-### 2026-05-18 16:34 - feat: add interview feedback templates
-
-### 2026-05-18 22:29 - fix: resolve memory leaks in video stream
-
-### 2026-05-19 15:06 - fix: improve error handling in forms
-
-### 2026-05-19 16:42 - style: improve mobile responsiveness
-
-### 2026-05-19 20:38 - refactor: separate layout and page logic
-
-### 2026-05-20 09:37 - style: animate hero section on load
-
-### 2026-05-20 13:46 - style: improve button hover effects
-
-### 2026-05-20 18:36 - feat: add interview result export feature
-
-### 2026-05-21 09:48 - fix: resolve authentication token expiry
-
-### 2026-05-21 17:25 - fix: resolve state management race condition
-
-### 2026-05-22 11:16 - feat: add candidate search and filter
-
-### 2026-05-22 12:19 - feat: add recruiter dashboard analytics
-
-### 2026-05-23 09:34 - style: add micro-animations to buttons
-
-### 2026-05-23 19:09 - style: improve candidate profile UI
-
-### 2026-05-23 20:23 - feat: add whiteboard collaboration tool
-
-### 2026-05-25 09:32 - refactor: improve TypeScript strict types
-
-### 2026-05-26 10:41 - feat: add proctor signal clarity monitor
-
-### 2026-05-26 14:43 - style: update color palette for dark mode
-
-### 2026-05-26 20:58 - fix: handle concurrent session conflicts
-
-### 2026-05-27 10:23 - fix: handle null pointer exceptions safely
-
-### 2026-05-27 19:39 - fix: resolve video call connection issues
-
-### 2026-05-28 16:25 - test: add unit tests for auth module
-
-### 2026-05-28 20:21 - docs: add contribution guidelines
-
-### 2026-05-28 20:49 - refactor: optimize bundle size
-
-### 2026-05-29 09:35 - docs: update README with features list
-
-### 2026-05-29 10:59 - docs: document Convex database schema
-
-### 2026-05-29 21:31 - feat: add behavioral interview module
-
-### 2026-05-30 13:07 - fix: correct interview status transitions
-
-### 2026-05-31 22:14 - fix: improve WebRTC connection stability
-
-### 2026-06-02 12:15 - feat: implement feedback collection form
-
-### 2026-06-02 15:06 - feat: add session replay functionality
-
-### 2026-06-03 12:17 - fix: patch security headers in middleware
-
-### 2026-06-04 13:42 - feat: implement role-based access control
-
-### 2026-06-08 19:23 - feat: add email notification system
-
-### 2026-06-09 12:52 - fix: resolve build warnings and lint errors
-
-### 2026-06-09 17:57 - feat: add candidate onboarding flow
-
-### 2026-06-09 20:31 - feat: add live coding environment
-
-### 2026-06-10 17:11 - fix: resolve dark mode flicker on load
-
-### 2026-06-11 10:59 - feat: add candidate scoring system
-
-### 2026-06-11 19:12 - refactor: extract reusable custom hooks
-
-### 2026-06-11 19:55 - style: polish landing page hero section
-
-### 2026-06-12 11:36 - fix: resolve Convex mutation error handling
-
-### 2026-06-12 19:41 - feat: add readiness score indicator
-
-### 2026-06-12 20:29 - feat: integrate Clerk authentication
-
-### 2026-06-13 11:50 - style: enhance dashboard grid layout
-
-### 2026-06-13 20:42 - docs: add environment variable guide
-
-### 2026-06-14 11:28 - fix: handle expired interview links
-
-### 2026-06-14 14:34 - style: improve accessibility contrast ratios
-
-### 2026-06-14 21:22 - docs: update README with features list
-
-### 2026-06-15 10:29 - feat: implement feedback collection form
-
-### 2026-06-15 14:15 - feat: add live coding environment
-
-### 2026-06-15 15:33 - feat: add candidate search and filter
-
-### 2026-06-17 16:56 - feat: add email notification system
-
-### 2026-06-17 19:14 - refactor: modularize API endpoint handlers
-
-### 2026-06-19 16:36 - fix: resolve authentication token expiry
-
-### 2026-06-20 16:48 - fix: handle concurrent session conflicts
-
-### 2026-06-20 20:31 - feat: integrate Clerk authentication
-
-### 2026-06-20 22:53 - fix: improve WebRTC connection stability
-
-### 2026-06-21 09:43 - docs: update API documentation
-
-### 2026-06-21 15:17 - style: add micro-animations to buttons
-
-### 2026-06-21 17:13 - test: add unit tests for auth module
-
-### 2026-06-23 11:42 - fix: handle edge cases in code editor
+# Changelog
+
+All notable changes to InterviewHub are documented here.
+
+> **Note:** This changelog reflects what was actually built and shipped.
+> Features listed in the [Roadmap](./README.md) section of the README
+> are planned but not yet implemented.
+
+---
+
+## [Unreleased]
+
+### Added
+- Real-time synchronized code editor — editor content, language selection, and challenge
+  are now synced live across all participants in a call via Convex `editorState` table
+- `convex/codeSync.ts` — `getEditorState` query + `upsertEditorState` mutation with
+  echo-suppression (writes from the local user are not applied back to their own editor)
+- `convex/lib.ts` — shared auth helpers (`requireAuth`, `requireUser`, `requireInterviewer`,
+  `requireMeetingParticipant`) used consistently across all Convex functions
+- `meetings.cancelScheduledMeeting` — mutation for atomic scheduling rollback when Stream
+  call creation fails after a successful Convex write
+- `Live` badge on the code editor panel when sync is active
+- GitHub Actions CI workflow (`.github/workflows/ci.yml`) — runs lint, typecheck, and build
+  on every push/PR to main
+
+### Fixed
+- **Authorization gaps in Convex queries:**
+  - `fetchAllProfiles` restricted to interviewer-only (previously any authenticated user
+    could enumerate all users' emails and avatars)
+  - `fetchProfileByClerkId` now requires authentication; candidates may only look up their
+    own profile; interviewers may look up any profile
+  - `fetchMeetingByCallId` now requires authentication (previously unauthenticated)
+  - `fetchEvaluationNotes` now requires the requester to be the candidate or an assigned
+    interviewer — prevents reading another candidate's private feedback
+- **Atomic scheduling:** Convex `scheduleMeeting` now runs before Stream `call.getOrCreate`;
+  if Convex validation fails (past date, missing candidate, etc.) no Stream call is created;
+  if Stream fails after a successful Convex write, the Convex record is rolled back via
+  `cancelScheduledMeeting`
+- **Dashboard route guard:** `/dashboard` now redirects candidates cleanly (same pattern as
+  `/schedule`) instead of throwing an unhandled Convex error with no error boundary
+- **Schedule error messages:** the real Convex validation error is now surfaced in the toast
+  instead of a generic "Could not schedule" fallback
+- **Schema type safety:** `interviews.status` changed from `v.string()` to a closed
+  `v.union(v.literal(...))` — invalid status values are now rejected at the DB layer
+- **Hardcoded Clerk publishable key fallback removed:** `layout.tsx` now fails fast with a
+  descriptive error if `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` is missing instead of silently
+  authenticating against the original project's Clerk instance
+- **`/schedule` page infinite loader on reload** — fixed by skipping the Convex query until
+  Clerk is fully hydrated (`isLoaded` check + `"skip"` argument)
+- **Navbar logo truncation** — removed `truncate max-w-[120px]` classes so "InterviewHub"
+  always renders in full
+
+---
+
+## What Is Actually Built
+
+| Feature | Status |
+|---------|--------|
+| Clerk authentication (sign-up/in, sessions, webhooks) | ✅ Fully implemented |
+| Role system (candidate / interviewer), manual promotion | ✅ Implemented |
+| Interview scheduling with validation | ✅ Implemented |
+| Live video + audio (Stream WebRTC) | ✅ Implemented |
+| Synchronized code editor (Convex real-time) | ✅ Implemented |
+| Multi-language editor (JS / Python / Java) | ✅ Implemented |
+| Structured feedback — star rating + written notes | ✅ Implemented |
+| Pass / Fail outcome marking | ✅ Implemented |
+| Recording playback (Stream recordings API) | ✅ Implemented |
+| Dark / light theme | ✅ Implemented |
+| Admin dashboard (interviewer-only with route guard) | ✅ Implemented |
+| Code execution / test runner | 🔴 Not implemented (planned) |
+| AI behavioral analysis / STAR feedback | 🔴 Not implemented (planned) |
+| In-app interviewer role promotion | 🔴 Not implemented (planned) |
+| Automated test suite | 🔴 Not implemented (planned) |

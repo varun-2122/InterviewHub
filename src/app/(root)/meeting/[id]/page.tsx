@@ -34,7 +34,7 @@ function MeetingPage() {
         {!setupFinished ? (
           <SetupScreen onSetupComplete={() => setSetupFinished(true)} />
         ) : (
-          <MeetingConsole />
+          <MeetingConsole callId={Array.isArray(id) ? id[0] : id} />
         )}
       </StreamTheme>
     </StreamCall>

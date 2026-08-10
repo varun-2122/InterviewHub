@@ -1,28 +1,15 @@
 import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
+import { requireAuth, requireInterviewer } from "./lib";
 
-// Valid status values for interview records
+// Valid status values for interview records — mirrors the schema union type
 const VALID_STATUSES = ["upcoming", "completed", "succeeded", "failed"] as const;
 
 // Fetches the global registry of scheduled and historical meetings.
 // Only accessible to interviewers — candidates use fetchMyMeetings instead.
 export const fetchMeetingsList = query({
   handler: async (ctx) => {
-    const sessionToken = await ctx.auth.getUserIdentity();
-    if (!sessionToken) {
-      throw new Error("Unauthorized: Access token missing or expired.");
-    }
-
-    // Scope to interviewer role only to prevent candidates reading all interview data
-    const requestingUser = await ctx.db
-      .query("users")
-      .withIndex("by_clerk_id", (q) => q.eq("clerkId", sessionToken.subject))
-      .first();
-
-    if (!requestingUser || requestingUser.role !== "interviewer") {
-      throw new Error("Forbidden: Only interviewers can access the full meeting list.");
-    }
-
+    await requireInterviewer(ctx);
     return await ctx.db.query("interviews").collect();
   },
 });
@@ -46,11 +33,16 @@ export const fetchMyMeetings = query({
   },
 });
 
-// Retrieves single meeting document using Stream call identifier
+// Retrieves single meeting document using Stream call identifier.
+// Requires authentication — any authenticated participant may look up a call.
+// The call ID UUID is not publicly guessable, but we still enforce auth
+// as a defense-in-depth measure.
 export const fetchMeetingByCallId = query({
   args: { streamCallId: v.string() },
   handler: async (ctx, args) => {
     if (!args.streamCallId) return null;
+
+    await requireAuth(ctx);
 
     return await ctx.db
       .query("interviews")
@@ -68,26 +60,18 @@ export const scheduleMeeting = mutation({
     title: v.string(),
     description: v.optional(v.string()),
     startTime: v.number(),
-    status: v.string(),
+    status: v.union(
+      v.literal("upcoming"),
+      v.literal("completed"),
+      v.literal("succeeded"),
+      v.literal("failed")
+    ),
     streamCallId: v.string(),
     candidateId: v.string(),
     interviewerIds: v.array(v.string()),
   },
   handler: async (ctx, input) => {
-    const sessionToken = await ctx.auth.getUserIdentity();
-    if (!sessionToken) {
-      throw new Error("Unauthorized: Session is required to schedule.");
-    }
-
-    // Verify requester is an interviewer
-    const requestingUser = await ctx.db
-      .query("users")
-      .withIndex("by_clerk_id", (q) => q.eq("clerkId", sessionToken.subject))
-      .first();
-
-    if (!requestingUser || requestingUser.role !== "interviewer") {
-      throw new Error("Forbidden: Only interviewers can schedule meetings.");
-    }
+    const { identity } = await requireInterviewer(ctx);
 
     // Validate required fields
     const trimmedTitle = input.title.trim();
@@ -132,6 +116,28 @@ export const scheduleMeeting = mutation({
   },
 });
 
+// Removes a scheduled meeting — used to clean up the Convex record when
+// the subsequent Stream call creation fails (atomic scheduling rollback).
+// Only the creating interviewer or any assigned interviewer may cancel.
+export const cancelScheduledMeeting = mutation({
+  args: { id: v.id("interviews") },
+  handler: async (ctx, args) => {
+    const { identity } = await requireInterviewer(ctx);
+
+    const meeting = await ctx.db.get(args.id);
+    if (!meeting) {
+      throw new Error("Not Found: Meeting does not exist.");
+    }
+
+    const isAssigned = meeting.interviewerIds.includes(identity.subject);
+    if (!isAssigned) {
+      throw new Error("Forbidden: You are not assigned to this interview.");
+    }
+
+    await ctx.db.delete(args.id);
+  },
+});
+
 // Mutation to update status of a meeting, saving end stamp on completed.
 // Only interviewers who are assigned to the meeting can change its status.
 export const changeMeetingStatus = mutation({
@@ -140,26 +146,13 @@ export const changeMeetingStatus = mutation({
     status: v.string(),
   },
   handler: async (ctx, args) => {
-    const sessionToken = await ctx.auth.getUserIdentity();
-    if (!sessionToken) {
-      throw new Error("Unauthorized: Authentication required.");
-    }
+    const { identity } = await requireInterviewer(ctx);
 
     // Validate the new status is a recognized value
     if (!VALID_STATUSES.includes(args.status as typeof VALID_STATUSES[number])) {
       throw new Error(
         `Validation Error: "${args.status}" is not a valid status. Must be one of: ${VALID_STATUSES.join(", ")}`
       );
-    }
-
-    // Verify requester is an interviewer
-    const requestingUser = await ctx.db
-      .query("users")
-      .withIndex("by_clerk_id", (q) => q.eq("clerkId", sessionToken.subject))
-      .first();
-
-    if (!requestingUser || requestingUser.role !== "interviewer") {
-      throw new Error("Forbidden: Only interviewers can update meeting status.");
     }
 
     // Verify the meeting exists
@@ -169,7 +162,7 @@ export const changeMeetingStatus = mutation({
     }
 
     // Verify requester is an assigned interviewer for this meeting
-    const isAssigned = meeting.interviewerIds.includes(sessionToken.subject);
+    const isAssigned = meeting.interviewerIds.includes(identity.subject);
     if (!isAssigned) {
       throw new Error("Forbidden: You are not assigned to this interview.");
     }

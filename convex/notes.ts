@@ -1,5 +1,6 @@
 import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
+import { requireInterviewer } from "./lib";
 
 // Submits a score rating and detailed commentary about a candidate's session.
 // Only interviewers assigned to the interview may post evaluation notes.
@@ -10,10 +11,7 @@ export const postEvaluationNote = mutation({
     rating: v.number(),
   },
   handler: async (ctx, args) => {
-    const activeSession = await ctx.auth.getUserIdentity();
-    if (!activeSession) {
-      throw new Error("Unauthorized: Authentication is missing.");
-    }
+    const { identity } = await requireInterviewer(ctx);
 
     // Validate rating is in expected range
     if (args.rating < 1 || args.rating > 5 || !Number.isInteger(args.rating)) {
@@ -26,40 +24,29 @@ export const postEvaluationNote = mutation({
       throw new Error("Validation Error: Feedback content cannot be empty.");
     }
 
-    // Verify requester is an interviewer by role
-    const requestingUser = await ctx.db
-      .query("users")
-      .withIndex("by_clerk_id", (q) => q.eq("clerkId", activeSession.subject))
-      .first();
-
-    if (!requestingUser || requestingUser.role !== "interviewer") {
-      throw new Error("Forbidden: Only interviewers can submit evaluation notes.");
-    }
-
     // Verify the interview exists and the requester is assigned to it
     const interview = await ctx.db.get(args.interviewId);
     if (!interview) {
       throw new Error("Not Found: The specified interview does not exist.");
     }
 
-    const isAssigned = interview.interviewerIds.includes(activeSession.subject);
+    const isAssigned = interview.interviewerIds.includes(identity.subject);
     if (!isAssigned) {
       throw new Error("Forbidden: You are not assigned as an interviewer for this session.");
     }
 
-    const { interviewId, rating } = args;
-
     return await ctx.db.insert("comments", {
-      interviewId,
+      interviewId: args.interviewId,
       content: trimmedContent,
-      rating,
-      interviewerId: activeSession.subject,
+      rating: args.rating,
+      interviewerId: identity.subject,
     });
   },
 });
 
 // Retrieves historical evaluation comments posted for a specific meeting room.
-// Accessible to any authenticated user (interviewers reviewing notes, candidates seeing feedback).
+// Accessible only to the candidate of that interview or the assigned interviewers —
+// prevents any authenticated user from reading another candidate's private feedback.
 export const fetchEvaluationNotes = query({
   args: { interviewId: v.id("interviews") },
   handler: async (ctx, args) => {
@@ -69,6 +56,17 @@ export const fetchEvaluationNotes = query({
     }
 
     if (!args.interviewId) return [];
+
+    // Membership check: requester must be the candidate or an assigned interviewer
+    const interview = await ctx.db.get(args.interviewId);
+    if (!interview) return [];
+
+    const isCandidate = interview.candidateId === sessionToken.subject;
+    const isInterviewer = interview.interviewerIds.includes(sessionToken.subject);
+
+    if (!isCandidate && !isInterviewer) {
+      throw new Error("Forbidden: You are not a participant in this interview.");
+    }
 
     return await ctx.db
       .query("comments")

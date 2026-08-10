@@ -36,6 +36,7 @@ export function InterviewScheduleUI() {
   const registeredMeetings = useQuery(api.meetings.fetchMeetingsList) ?? [];
   const systemAccounts = useQuery(api.accounts.fetchAllProfiles) ?? [];
   const commitMeeting = useMutation(api.meetings.scheduleMeeting);
+  const cancelScheduledMeeting = useMutation(api.meetings.cancelScheduledMeeting);
 
   const candidatesList = systemAccounts?.filter((u: any) => u.role === "candidate");
   const interviewersList = systemAccounts?.filter((u: any) => u.role === "interviewer");
@@ -58,6 +59,8 @@ export function InterviewScheduleUI() {
 
     setSubmitting(true);
 
+    let convexId: string | null = null;
+
     try {
       const { title, description, date, time, candidateId, interviewerIds } = meetingForm;
       const [hours, minutes] = time.split(":");
@@ -65,19 +68,11 @@ export function InterviewScheduleUI() {
       finalizedDate.setHours(parseInt(hours), parseInt(minutes), 0);
 
       const uniqueId = crypto.randomUUID();
-      const call = streamClient.call("default", uniqueId);
 
-      await call.getOrCreate({
-        data: {
-          starts_at: finalizedDate.toISOString(),
-          custom: {
-            description: title,
-            additionalDetails: description,
-          },
-        },
-      });
-
-      await commitMeeting({
+      // Step 1: Persist to Convex first so validation errors (past date,
+      // missing candidate, etc.) surface before we touch Stream.
+      // If this throws, no Stream call is created — nothing to clean up.
+      convexId = await commitMeeting({
         title,
         description,
         startTime: finalizedDate.getTime(),
@@ -86,6 +81,27 @@ export function InterviewScheduleUI() {
         candidateId,
         interviewerIds,
       });
+
+      // Step 2: Create the Stream call with the same UUID.
+      // If this fails, roll back the Convex record so we don't orphan data.
+      const call = streamClient.call("default", uniqueId);
+      try {
+        await call.getOrCreate({
+          data: {
+            starts_at: finalizedDate.toISOString(),
+            custom: {
+              description: title,
+              additionalDetails: description,
+            },
+          },
+        });
+      } catch (streamErr) {
+        // Roll back the Convex record to prevent an orphaned interview row
+        if (convexId) {
+          await cancelScheduledMeeting({ id: convexId as any });
+        }
+        throw streamErr;
+      }
 
       setModalOpen(false);
       toast.success("Interview scheduled successfully!");
@@ -100,7 +116,10 @@ export function InterviewScheduleUI() {
       });
     } catch (err) {
       console.error("Failed to commit schedule:", err);
-      toast.error("Could not schedule the meeting. Try again.");
+      // Surface the actual server validation message instead of a generic fallback
+      const message =
+        err instanceof Error ? err.message : "Could not schedule the meeting. Try again.";
+      toast.error(message);
     } finally {
       setSubmitting(false);
     }

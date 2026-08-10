@@ -10,6 +10,9 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { MEETING_STATUS_MAP } from "@/constants/sessionConfig";
 import { Badge } from "@/components/ui/badge";
+import { useRoleCheck } from "@/hooks/useRoleCheck";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -30,9 +33,22 @@ import FeedbackModal from "@/components/feedback/FeedbackModal";
 type MeetingRecord = Doc<"interviews">;
 
 function DashboardPage() {
+  const routerInstance = useRouter();
+  const { isInterviewer, isCandidate, isRoleLoading } = useRoleCheck();
+
+  // Redirect non-interviewers — same pattern used in /schedule
+  useEffect(() => {
+    if (!isRoleLoading && !isInterviewer) {
+      routerInstance.push("/");
+    }
+  }, [isRoleLoading, isInterviewer, routerInstance]);
+
   const accounts = useQuery(api.accounts.fetchAllProfiles);
   const meetings = useQuery(api.meetings.fetchMeetingsList);
   const transitionStatus = useMutation(api.meetings.changeMeetingStatus);
+
+  if (isRoleLoading) return <Loader />;
+  if (!isInterviewer) return null;
 
   const performStatusTransition = async (
     meetingId: Id<"interviews">,

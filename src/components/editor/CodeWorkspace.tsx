@@ -1,7 +1,7 @@
 "use client";
 
 import { CHALLENGE_LIST, EDITOR_LANGUAGES } from "@/constants/sessionConfig";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import {
   ResizableHandle,
   ResizablePanel,
@@ -16,13 +16,39 @@ import {
   SelectValue,
 } from "../ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { AlertCircle, FileText, Sparkles } from "lucide-react";
+import { AlertCircle, FileText, Radio, Sparkles } from "lucide-react";
 import Editor from "@monaco-editor/react";
+import { useMutation, useQuery } from "convex/react";
+import { api } from "../../../convex/_generated/api";
+import { useUser } from "@clerk/nextjs";
 
 type SupportedLanguage = "javascript" | "python" | "java";
 
-// Coding challenges workspace including code editor panel
-export function CodeWorkspace() {
+interface CodeWorkspaceProps {
+  /** Stream call ID used as the shared document key for real-time sync */
+  callId?: string;
+}
+
+// Debounce helper — delays execution until `ms` ms have elapsed since the last call
+function useDebouncedCallback<T extends unknown[]>(
+  fn: (...args: T) => void,
+  ms: number
+) {
+  const timerRef = useRef<ReturnType<typeof setTimeout>>();
+  return useCallback(
+    (...args: T) => {
+      clearTimeout(timerRef.current);
+      timerRef.current = setTimeout(() => fn(...args), ms);
+    },
+    [fn, ms]
+  );
+}
+
+// Coding challenges workspace — editor content is synced in real time across
+// all participants in the same call via Convex live queries when `callId` is provided.
+export function CodeWorkspace({ callId }: CodeWorkspaceProps) {
+  const { user: clerkUser } = useUser();
+
   const [currentChallenge, setCurrentChallenge] = useState(CHALLENGE_LIST[0]);
   const [currentLanguage, setCurrentLanguage] = useState<SupportedLanguage>(
     EDITOR_LANGUAGES[0].id
@@ -31,26 +57,94 @@ export function CodeWorkspace() {
     currentChallenge.templates[EDITOR_LANGUAGES[0].id]
   );
 
+  // Track whether the most recent content change originated locally so we can
+  // skip applying our own echo back from Convex (prevents cursor jumping).
+  const lastLocalWriteBy = useRef<string | null>(null);
+
+  // --- Real-time sync via Convex ---
+  const remoteState = useQuery(
+    api.codeSync.getEditorState,
+    callId ? { callId } : "skip"
+  );
+  const upsertEditorState = useMutation(api.codeSync.upsertEditorState);
+
+  // Apply incoming remote state changes.
+  // Skip if `lastUpdatedBy` matches our own Clerk ID — that's our own echo.
+  useEffect(() => {
+    if (!remoteState) return;
+
+    const isOwnEcho = remoteState.lastUpdatedBy === clerkUser?.id;
+    if (isOwnEcho) return;
+
+    // Sync challenge selection
+    const remoteChallenge = CHALLENGE_LIST.find(
+      (c) => c.id === remoteState.challengeId
+    );
+    if (remoteChallenge && remoteChallenge.id !== currentChallenge.id) {
+      setCurrentChallenge(remoteChallenge);
+    }
+
+    // Sync language selection
+    if (
+      remoteState.language !== currentLanguage &&
+      EDITOR_LANGUAGES.some((l) => l.id === remoteState.language)
+    ) {
+      setCurrentLanguage(remoteState.language as SupportedLanguage);
+    }
+
+    // Sync editor content
+    setCodeContent(remoteState.content);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [remoteState]);
+
+  // Debounced write to Convex — fires 300 ms after the user stops typing
+  const pushToConvex = useDebouncedCallback(
+    useCallback(
+      (content: string, language: string, challengeId: string) => {
+        if (!callId || !clerkUser) return;
+        lastLocalWriteBy.current = clerkUser.id;
+        upsertEditorState({ callId, content, language, challengeId }).catch(
+          (err) => console.error("Editor sync write failed:", err)
+        );
+      },
+      [callId, clerkUser, upsertEditorState]
+    ),
+    300
+  );
+
   const switchChallenge = useCallback(
     (challengeId: string) => {
       const found = CHALLENGE_LIST.find((c) => c.id === challengeId);
       if (found) {
         setCurrentChallenge(found);
-        // Reset code to the template for the current language
-        setCodeContent(found.templates[currentLanguage]);
+        const template = found.templates[currentLanguage];
+        setCodeContent(template);
+        pushToConvex(template, currentLanguage, found.id);
       }
     },
-    [currentLanguage]
+    [currentLanguage, pushToConvex]
   );
 
   const switchLanguage = useCallback(
     (langId: SupportedLanguage) => {
       setCurrentLanguage(langId);
-      // Reset code to the template for the new language
-      setCodeContent(currentChallenge.templates[langId]);
+      const template = currentChallenge.templates[langId];
+      setCodeContent(template);
+      pushToConvex(template, langId, currentChallenge.id);
     },
-    [currentChallenge]
+    [currentChallenge, pushToConvex]
   );
+
+  const handleEditorChange = useCallback(
+    (val: string | undefined) => {
+      const newContent = val || "";
+      setCodeContent(newContent);
+      pushToConvex(newContent, currentLanguage, currentChallenge.id);
+    },
+    [currentLanguage, currentChallenge, pushToConvex]
+  );
+
+  const isLive = !!callId;
 
   return (
     <ResizablePanelGroup
@@ -71,6 +165,14 @@ export function CodeWorkspace() {
               </div>
 
               <div className="flex items-center gap-2">
+                {/* Live sync indicator */}
+                {isLive && (
+                  <div className="flex items-center gap-1.5 text-xs text-emerald-500 font-medium px-2 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20">
+                    <Radio className="h-3 w-3 animate-pulse" />
+                    Live
+                  </div>
+                )}
+
                 <Select
                   value={currentChallenge.id}
                   onValueChange={switchChallenge}
@@ -189,7 +291,7 @@ export function CodeWorkspace() {
             language={currentLanguage}
             theme="vs-dark"
             value={codeContent}
-            onChange={(val) => setCodeContent(val || "")}
+            onChange={handleEditorChange}
             options={{
               minimap: { enabled: false },
               fontSize: 14,

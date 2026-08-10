@@ -24,8 +24,13 @@ import { Button } from "../ui/button";
 import EndCallButton from "./EndCallButton";
 import CodeWorkspace from "../editor/CodeWorkspace";
 
+interface MeetingConsoleProps {
+  /** Stream call ID forwarded to CodeWorkspace for real-time editor sync */
+  callId: string;
+}
+
 // Live meeting workspace room split between video stream controls and code workspace
-export function MeetingConsole() {
+export function MeetingConsole({ callId }: MeetingConsoleProps) {
   const routerInstance = useRouter();
   const [viewMode, setViewMode] = useState<"grid" | "speaker">("speaker");
   const [displayAttendees, setDisplayAttendees] = useState(false);
@@ -103,7 +108,7 @@ export function MeetingConsole() {
         <ResizableHandle withHandle />
 
         <ResizablePanel defaultSize={65} minSize={25}>
-          <CodeWorkspace />
+          <CodeWorkspace callId={callId} />
         </ResizablePanel>
       </ResizablePanelGroup>
     </div>

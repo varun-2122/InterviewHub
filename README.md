@@ -12,7 +12,7 @@
 
 ## Overview
 
-InterviewHub is a **two-sided technical interview platform** for companies running live coding assessments. It provides a shared workspace where interviewers and candidates can collaborate in real-time across video, audio, and a synchronized code editor — all in a single session.
+InterviewHub is a **two-sided technical interview platform** for companies running live coding assessments. It provides a shared workspace where interviewers and candidates can collaborate in real-time across video, audio, and a **synchronized code editor** — all in a single session. Editor state (content, language selection, and challenge) is synced live across all participants via Convex real-time subscriptions.
 
 **Interviewers** schedule sessions, start video rooms, set coding challenges, and leave structured evaluations. **Candidates** receive access to their assigned interviews and join when ready.
 
@@ -116,13 +116,14 @@ InterviewScheduleUI dialog opens
   └── Clicks "Schedule Interview"
       │
       ▼
-StreamClient.call("default", uuid).getOrCreate()   ← creates Stream room
-      │
-      ▼
-Convex: scheduleMeeting mutation                    ← persists to DB
+Convex: scheduleMeeting mutation                    ← validates + persists to DB first
   • title, description, startTime
-  • streamCallId (links to Stream room)
+  • streamCallId (pre-generated UUID)
   • candidateId, interviewerIds
+      │  (only if Convex succeeds)
+      ▼
+StreamClient.call("default", uuid).getOrCreate()   ← creates Stream room
+  └── On Stream failure: cancelScheduledMeeting()  ← rolls back Convex row
       │
       ▼
 Candidate's home page auto-updates (Convex real-time)
@@ -202,19 +203,22 @@ InterviewHub uses Convex queries and mutations rather than a traditional REST AP
 |----------|--------------|---------------|-------------|
 | `meetings.fetchMeetingsList` | ✅ | Interviewer | All interviews in the system |
 | `meetings.fetchMyMeetings` | ✅ | Any | Interviews where current user is candidate |
-| `meetings.fetchMeetingByCallId` | ✅ | Any | Single interview by Stream call ID |
-| `accounts.fetchAllProfiles` | ✅ | Any | All registered user profiles |
-| `accounts.fetchProfileByClerkId` | — | — | Single user by Clerk ID |
-| `notes.fetchEvaluationNotes` | ✅ | Any | Comments for a specific interview |
+| `meetings.fetchMeetingByCallId` | ✅ | Any (authenticated) | Single interview by Stream call ID |
+| `accounts.fetchAllProfiles` | ✅ | Interviewer | All registered user profiles |
+| `accounts.fetchProfileByClerkId` | ✅ | Self or Interviewer | Single user by Clerk ID |
+| `notes.fetchEvaluationNotes` | ✅ | Participant only | Comments for a specific interview |
+| `codeSync.getEditorState` | ✅ | Any (authenticated) | Shared editor state for a call room |
 
 ### Convex Mutations
 
 | Function | Auth Required | Role Required | Description |
 |----------|--------------|---------------|-------------|
 | `meetings.scheduleMeeting` | ✅ | Interviewer | Create a new scheduled interview |
+| `meetings.cancelScheduledMeeting` | ✅ | Interviewer (assigned) | Delete an interview (used for rollback) |
 | `meetings.changeMeetingStatus` | ✅ | Interviewer (assigned) | Update interview status |
 | `accounts.syncUserProfile` | — | — | Upsert user record (called by webhook) |
 | `notes.postEvaluationNote` | ✅ | Interviewer (assigned) | Submit feedback for an interview |
+| `codeSync.upsertEditorState` | ✅ | Any (authenticated) | Write shared editor state for a call room |
 
 ### HTTP Endpoints (Convex)
 
@@ -254,12 +258,14 @@ InterviewHub uses Convex queries and mutations rather than a traditional REST AP
 ```
 InterviewHub/
 ├── convex/                     # Convex backend (serverless functions + schema)
-│   ├── schema.ts               # Database schema: users, interviews, comments
+│   ├── schema.ts               # Database schema: users, interviews, comments, editorState
 │   ├── accounts.ts             # User profile queries/mutations
 │   ├── meetings.ts             # Interview scheduling + status queries/mutations
 │   ├── notes.ts                # Evaluation feedback queries/mutations
+│   ├── codeSync.ts             # Real-time code editor state sync
+│   ├── lib.ts                  # Shared auth helpers (requireAuth, requireInterviewer, etc.)
 │   ├── webhooks.ts             # Clerk webhook handler (user.created)
-│   └── auth.config.ts          # Convex ↔ Clerk auth configuration
+│   └── auth.config.ts          # Convex ↔ Clerk auth configuration (update domain per deployment)
 │
 ├── src/
 │   ├── actions/
@@ -311,7 +317,8 @@ InterviewHub/
 │   │   ├── coreUtils.ts        # groupMeetingsByStatus, resolveUserInfo, getMeetingLiveStatus
 │   │   └── utils.ts            # cn() helper (clsx + tailwind-merge)
 │   │
-│   └── middleware.ts           # Clerk auth middleware (protects all routes)
+│   └── middleware.ts           # Clerk auth middleware (makes auth() available; route protection
+  │                        #  is enforced at the Convex function level, not here)
 │
 ├── public/
 │   ├── javascript.png          # Language icon for code editor selector
@@ -356,7 +363,20 @@ npx convex dev
 # This starts a local Convex dev server and sets NEXT_PUBLIC_CONVEX_URL in .env.local
 ```
 
-### 4. Configure the Clerk webhook
+### 4. Update Convex auth configuration
+
+Open `convex/auth.config.ts` and update `domain` to match your Clerk instance JWT issuer URL:
+
+```ts
+// convex/auth.config.ts
+domain: "https://<your-clerk-subdomain>.clerk.accounts.dev/",
+```
+
+Find your JWT issuer at: **Clerk Dashboard → API Keys → JWT Issuer**.
+
+> Without this step, Convex will reject all JWTs from your users — users can sign in but can’t load any data.
+
+### 5. Configure the Clerk webhook
 
 In your [Clerk Dashboard](https://dashboard.clerk.com):
 1. Go to **Webhooks** → **Add Endpoint**
@@ -365,7 +385,7 @@ In your [Clerk Dashboard](https://dashboard.clerk.com):
 3. Subscribe to the `user.created` event
 4. Copy the **Signing Secret** → paste as `CLERK_WEBHOOK_SECRET` in `.env.local`
 
-### 5. Set user roles
+### 6. Set user roles
 
 By default, all newly signed-up users are created with `role: "candidate"`. To grant interviewer access, update the role directly in the Convex dashboard:
 1. Go to your Convex project dashboard → **Data** → `users`

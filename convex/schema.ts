@@ -18,7 +18,15 @@ export default defineSchema({
     description: v.optional(v.string()),
     startTime: v.number(),
     endTime: v.optional(v.number()),
-    status: v.string(), // e.g. 'upcoming', 'completed', 'succeeded', 'failed'
+    // Closed enum enforced at the schema level — any write with an unlisted
+    // status value will be rejected by the Convex validator before reaching
+    // the mutation handler.
+    status: v.union(
+      v.literal("upcoming"),
+      v.literal("completed"),
+      v.literal("succeeded"),
+      v.literal("failed")
+    ),
     streamCallId: v.string(),
     candidateId: v.string(),
     interviewerIds: v.array(v.string()),
@@ -33,4 +41,16 @@ export default defineSchema({
     interviewerId: v.string(),
     interviewId: v.id("interviews"),
   }).index("by_interview_id", ["interviewId"]),
+
+  // Shared real-time code editor state, keyed by Stream call ID.
+  // All participants in the same call subscribe to and write to this document.
+  editorState: defineTable({
+    callId: v.string(),
+    content: v.string(),
+    language: v.string(),
+    challengeId: v.string(),
+    // Tracks who made the last update so clients can skip echoing their own writes
+    lastUpdatedBy: v.optional(v.string()),
+    updatedAt: v.optional(v.number()),
+  }).index("by_call_id", ["callId"]),
 });
