@@ -17,11 +17,13 @@ import {
 } from "../ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { AlertCircle, FileText, Play, Radio, Sparkles, Terminal } from "lucide-react";
-import Editor from "@monaco-editor/react";
+import dynamic from "next/dynamic";
+const Editor = dynamic(() => import("@monaco-editor/react"), { ssr: false });
 import { useAction, useMutation, useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { useUser } from "@clerk/nextjs";
 import toast from "react-hot-toast";
+import Image from "next/image";
 
 type SupportedLanguage = "javascript" | "python" | "java";
 
@@ -252,10 +254,12 @@ export function CodeWorkspace({ callId }: CodeWorkspaceProps) {
                   <SelectTrigger className="w-[140px] h-9 text-xs">
                     <SelectValue>
                       <div className="flex items-center gap-2">
-                        <img
+                        <Image
                           src={`/${currentLanguage}.png`}
                           alt={currentLanguage}
-                          className="w-4 h-4 object-contain"
+                          width={16}
+                          height={16}
+                          className="object-contain"
                         />
                         <span className="capitalize">{currentLanguage}</span>
                       </div>
@@ -265,10 +269,12 @@ export function CodeWorkspace({ callId }: CodeWorkspaceProps) {
                     {EDITOR_LANGUAGES.map((lang) => (
                       <SelectItem key={lang.id} value={lang.id} className="text-xs cursor-pointer">
                         <div className="flex items-center gap-2">
-                          <img
+                          <Image
                             src={`/${lang.id}.png`}
                             alt={lang.label}
-                            className="w-4 h-4 object-contain"
+                            width={16}
+                            height={16}
+                            className="object-contain"
                           />
                           <span>{lang.label}</span>
                         </div>
