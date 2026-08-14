@@ -221,3 +221,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-08-11 15:44 - feat: implement real-time collaboration
 
 ### 2026-08-13 12:51 - fix: improve sign-in redirect flow
+
+### 2026-08-14 09:15 - style: improve accessibility contrast ratios
