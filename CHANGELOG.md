@@ -225,3 +225,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-08-14 09:15 - style: improve accessibility contrast ratios
 
 ### 2026-08-14 21:13 - docs: update deployment instructions
+
+### 2026-08-15 18:35 - style: polish recruiter dashboard cards
