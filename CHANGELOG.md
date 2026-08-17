@@ -229,3 +229,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-08-15 18:35 - style: polish recruiter dashboard cards
 
 ### 2026-08-15 22:33 - style: add glassmorphism card effects
+
+### 2026-08-17 18:37 - fix: improve WebRTC connection stability
