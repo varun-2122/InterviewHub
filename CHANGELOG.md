@@ -233,3 +233,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-08-17 18:37 - fix: improve WebRTC connection stability
 
 ### 2026-08-18 17:39 - docs: update README with features list
+
+### 2026-08-18 19:27 - refactor: optimize database queries
