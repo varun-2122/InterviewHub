@@ -231,3 +231,5 @@ All notable changes to InterviewHub are documented here.
 ### 2026-08-15 22:33 - style: add glassmorphism card effects
 
 ### 2026-08-17 18:37 - fix: improve WebRTC connection stability
+
+### 2026-08-18 17:39 - docs: update README with features list
