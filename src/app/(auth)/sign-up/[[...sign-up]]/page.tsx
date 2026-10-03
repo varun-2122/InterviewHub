@@ -8,7 +8,7 @@ export default function SignUpPage() {
         {/* Unified container for perfect seamless border & shadow */}
         <div className="bg-[#090d16] border border-slate-800 rounded-xl shadow-2xl overflow-hidden">
           {/* Custom InterviewHub header — overrides Clerk's default */}
-          <div className="px-8 pt-8 pb-5 text-center space-y-1.5">
+          <div className="px-8 pt-8 pb-7 text-center space-y-1.5">
             <div className="flex items-center justify-center gap-2 mb-3">
               <div className="size-8 rounded bg-[#00d2fd] flex items-center justify-center text-[#090d16] font-extrabold text-sm">
                 IH
@@ -44,12 +44,12 @@ export default function SignUpPage() {
               },
               elements: {
                 rootBox: "w-full",
-                card: "bg-transparent shadow-none border-0 px-6 pb-6 pt-2 rounded-none",
-              header: "hidden",
-              headerTitle: "hidden",
-              headerSubtitle: "hidden",
-              socialButtonsBlockButton:
-                "border border-slate-700 bg-[#111827] text-white font-medium text-xs rounded hover:bg-slate-800 transition-colors",
+                card: "bg-transparent shadow-none border-0 px-6 pb-6 pt-0 rounded-none",
+                header: "hidden",
+                headerTitle: "hidden",
+                headerSubtitle: "hidden",
+                socialButtonsBlockButton:
+                  "relative w-full border border-slate-700 bg-[#111827] text-white font-medium text-xs rounded hover:bg-slate-800 transition-colors",
               dividerLine: "bg-slate-800",
               dividerText: "text-xs text-slate-400 uppercase tracking-widest",
               formFieldLabel: "text-xs font-semibold text-slate-200",
