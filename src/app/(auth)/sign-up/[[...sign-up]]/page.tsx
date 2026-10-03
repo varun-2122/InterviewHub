@@ -4,7 +4,7 @@ import { dark } from "@clerk/themes";
 export default function SignUpPage() {
   return (
     <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center p-4 bg-background">
-      <div className="w-full max-w-[480px] space-y-0">
+      <div className="w-full max-w-[400px] space-y-0">
         {/* Custom InterviewHub header — overrides Clerk's "Create your CodeSync account" */}
         <div className="bg-[#090d16] border border-b-0 border-slate-800 rounded-t-xl px-8 pt-8 pb-5 text-center space-y-1.5">
           <div className="flex items-center justify-center gap-2 mb-3">
