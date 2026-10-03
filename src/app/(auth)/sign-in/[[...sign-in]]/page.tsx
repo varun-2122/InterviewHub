@@ -38,7 +38,7 @@ export default function SignInPage() {
               baseTheme: dark,
               variables: {
                 colorPrimary: "#00d2fd",
-                colorBackground: "#090d16",
+                colorBackground: "transparent",
                 colorInputBackground: "#111827",
                 colorInputText: "#ffffff",
                 colorText: "#ffffff",
@@ -46,24 +46,11 @@ export default function SignInPage() {
               },
               elements: {
                 rootBox: "w-full",
-                cardBox: "shadow-none border-0 bg-transparent",
-                card: "!bg-transparent !shadow-none !border-none px-6 pb-6 pt-0 rounded-none",
+                cardBox: "shadow-none border-0",
+                card: "bg-transparent shadow-none border-0 rounded-none",
                 header: "hidden",
-                headerTitle: "hidden",
-                headerSubtitle: "hidden",
-                socialButtonsBlockButton:
-                  "relative border border-slate-700 bg-[#111827] text-white font-medium text-xs rounded hover:bg-slate-800 transition-colors",
-              dividerLine: "bg-slate-800",
-              dividerText: "text-xs text-slate-400 uppercase tracking-widest",
-              formFieldLabel: "text-xs font-semibold text-slate-200",
-              formFieldInput:
-                "bg-[#111827] border border-slate-700 rounded text-xs text-white placeholder:text-slate-500 focus:ring-1 focus:ring-[#00d2fd]",
-              formButtonPrimary:
-                "bg-[#182442] hover:bg-[#25355c] text-white text-xs font-bold rounded py-2.5 transition-all shadow-md border border-slate-700",
-              footer: "bg-[#090d16] border-t border-slate-800",
-              footerActionText: "text-xs text-slate-400",
-              footerActionLink: "text-xs text-[#00d2fd] font-semibold hover:underline",
-            },
+                footer: "bg-transparent border-t border-slate-800",
+              },
           }}
         />
         </div>
