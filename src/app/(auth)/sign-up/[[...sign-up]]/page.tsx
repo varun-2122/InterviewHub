@@ -46,6 +46,7 @@ export default function SignUpPage() {
               },
               elements: {
                 rootBox: "w-full",
+                cardBox: "shadow-none border-0 bg-transparent",
                 card: "!bg-transparent !shadow-none !border-none px-6 pb-6 pt-0 rounded-none",
                 header: "hidden",
                 headerTitle: "hidden",
