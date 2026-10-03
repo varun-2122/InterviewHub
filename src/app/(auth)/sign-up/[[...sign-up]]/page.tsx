@@ -3,7 +3,7 @@ import { dark } from "@clerk/themes";
 
 export default function SignUpPage() {
   return (
-    <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center p-4 bg-background">
+    <div className="dark min-h-[calc(100vh-4rem)] flex items-center justify-center p-4 bg-[#030712]">
       <div className="w-full max-w-[400px]">
         {/* Unified container for perfect seamless border & shadow */}
         <div className="bg-[#090d16] border border-slate-800 rounded-xl shadow-2xl overflow-hidden">
