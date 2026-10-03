@@ -4,7 +4,31 @@ import { dark } from "@clerk/themes";
 export default function SignInPage() {
   return (
     <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center p-4 bg-background">
-      <div className="w-full max-w-[480px]">
+      <div className="w-full max-w-[480px] space-y-0">
+        {/* Custom InterviewHub header — overrides Clerk's "Sign in to CodeSync" */}
+        <div className="bg-[#090d16] border border-b-0 border-slate-800 rounded-t-xl px-8 pt-8 pb-5 text-center space-y-1.5">
+          <div className="flex items-center justify-center gap-2 mb-3">
+            <div className="size-8 rounded bg-[#00d2fd] flex items-center justify-center text-[#090d16] font-extrabold text-sm">
+              IH
+            </div>
+            <span
+              className="font-extrabold text-white text-lg tracking-tight"
+              style={{ fontFamily: "Manrope, system-ui, sans-serif" }}
+            >
+              InterviewHub
+            </span>
+          </div>
+          <h1
+            className="text-xl font-bold text-white"
+            style={{ fontFamily: "Manrope, system-ui, sans-serif" }}
+          >
+            Sign in to InterviewHub
+          </h1>
+          <p className="text-xs text-slate-400">
+            Welcome back! Please sign in to continue.
+          </p>
+        </div>
+
         <SignIn
           appearance={{
             baseTheme: dark,
@@ -18,13 +42,14 @@ export default function SignInPage() {
             },
             elements: {
               rootBox: "w-full",
-              card: "bg-[#090d16] border border-slate-800 shadow-2xl rounded-xl p-6",
-              headerTitle: "font-heading text-xl font-bold text-white text-center",
-              headerSubtitle: "text-xs text-slate-400 text-center",
+              card: "bg-[#090d16] border border-t-0 border-slate-800 shadow-2xl rounded-b-xl rounded-t-none px-6 pb-6 pt-2",
+              header: "hidden",
+              headerTitle: "hidden",
+              headerSubtitle: "hidden",
               socialButtonsBlockButton:
                 "border border-slate-700 bg-[#111827] text-white font-medium text-xs rounded hover:bg-slate-800 transition-colors",
               dividerLine: "bg-slate-800",
-              dividerText: "text-xs label-caps text-slate-400 uppercase",
+              dividerText: "text-xs text-slate-400 uppercase tracking-widest",
               formFieldLabel: "text-xs font-semibold text-slate-200",
               formFieldInput:
                 "bg-[#111827] border border-slate-700 rounded text-xs text-white placeholder:text-slate-500 focus:ring-1 focus:ring-[#00d2fd]",

@@ -54,5 +54,10 @@
     "ts-jest": "^29.4.12",
     "ts-node": "^10.9.2",
     "typescript": "^5"
+  },
+  "allowScripts": {
+    "@clerk/shared@3.47.8": true,
+    "esbuild@0.25.2": true,
+    "unrs-resolver@1.12.2": true
   }
 }
