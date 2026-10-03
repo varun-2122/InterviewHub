@@ -4,45 +4,47 @@ import { dark } from "@clerk/themes";
 export default function SignUpPage() {
   return (
     <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center p-4 bg-background">
-      <div className="w-full max-w-[400px] space-y-0">
-        {/* Custom InterviewHub header — overrides Clerk's "Create your CodeSync account" */}
-        <div className="bg-[#090d16] border border-b-0 border-slate-800 rounded-t-xl px-8 pt-8 pb-5 text-center space-y-1.5">
-          <div className="flex items-center justify-center gap-2 mb-3">
-            <div className="size-8 rounded bg-[#00d2fd] flex items-center justify-center text-[#090d16] font-extrabold text-sm">
-              IH
+      <div className="w-full max-w-[400px]">
+        {/* Unified container for perfect seamless border & shadow */}
+        <div className="bg-[#090d16] border border-slate-800 rounded-xl shadow-2xl overflow-hidden">
+          {/* Custom InterviewHub header — overrides Clerk's default */}
+          <div className="px-8 pt-8 pb-5 text-center space-y-1.5">
+            <div className="flex items-center justify-center gap-2 mb-3">
+              <div className="size-8 rounded bg-[#00d2fd] flex items-center justify-center text-[#090d16] font-extrabold text-sm">
+                IH
+              </div>
+              <span
+                className="font-extrabold text-white text-lg tracking-tight"
+                style={{ fontFamily: "Manrope, system-ui, sans-serif" }}
+              >
+                InterviewHub
+              </span>
             </div>
-            <span
-              className="font-extrabold text-white text-lg tracking-tight"
+            <h1
+              className="text-xl font-bold text-white"
               style={{ fontFamily: "Manrope, system-ui, sans-serif" }}
             >
-              InterviewHub
-            </span>
+              Create your InterviewHub account
+            </h1>
+            <p className="text-xs text-slate-400">
+              Join the precision recruitment platform for top technical talent.
+            </p>
           </div>
-          <h1
-            className="text-xl font-bold text-white"
-            style={{ fontFamily: "Manrope, system-ui, sans-serif" }}
-          >
-            Create your InterviewHub account
-          </h1>
-          <p className="text-xs text-slate-400">
-            Join the precision recruitment platform for top technical talent.
-          </p>
-        </div>
 
-        <SignUp
-          appearance={{
-            baseTheme: dark,
-            variables: {
-              colorPrimary: "#00d2fd",
-              colorBackground: "#090d16",
-              colorInputBackground: "#111827",
-              colorInputText: "#ffffff",
-              colorText: "#ffffff",
-              colorTextSecondary: "#9ca3af",
-            },
-            elements: {
-              rootBox: "w-full",
-              card: "bg-[#090d16] border border-t-0 border-slate-800 shadow-2xl rounded-b-xl rounded-t-none px-6 pb-6 pt-2",
+          <SignUp
+            appearance={{
+              baseTheme: dark,
+              variables: {
+                colorPrimary: "#00d2fd",
+                colorBackground: "#090d16",
+                colorInputBackground: "#111827",
+                colorInputText: "#ffffff",
+                colorText: "#ffffff",
+                colorTextSecondary: "#9ca3af",
+              },
+              elements: {
+                rootBox: "w-full",
+                card: "bg-transparent shadow-none border-0 px-6 pb-6 pt-2 rounded-none",
               header: "hidden",
               headerTitle: "hidden",
               headerSubtitle: "hidden",
@@ -61,6 +63,7 @@ export default function SignUpPage() {
             },
           }}
         />
+        </div>
       </div>
     </div>
   );
