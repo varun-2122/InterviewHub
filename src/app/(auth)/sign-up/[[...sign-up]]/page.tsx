@@ -32,6 +32,8 @@ export default function SignUpPage() {
           </div>
 
           <SignUp
+            routing="path"
+            path="/sign-up"
             appearance={{
               baseTheme: dark,
               variables: {
@@ -44,12 +46,12 @@ export default function SignUpPage() {
               },
               elements: {
                 rootBox: "w-full",
-                card: "bg-transparent shadow-none border-0 px-6 pb-6 pt-0 rounded-none",
+                card: "!bg-transparent !shadow-none !border-none px-6 pb-6 pt-0 rounded-none",
                 header: "hidden",
                 headerTitle: "hidden",
                 headerSubtitle: "hidden",
                 socialButtonsBlockButton:
-                  "relative w-full border border-slate-700 bg-[#111827] text-white font-medium text-xs rounded hover:bg-slate-800 transition-colors",
+                  "relative border border-slate-700 bg-[#111827] text-white font-medium text-xs rounded hover:bg-slate-800 transition-colors",
               dividerLine: "bg-slate-800",
               dividerText: "text-xs text-slate-400 uppercase tracking-widest",
               formFieldLabel: "text-xs font-semibold text-slate-200",
