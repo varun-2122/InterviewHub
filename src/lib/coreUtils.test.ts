@@ -34,7 +34,7 @@ describe('coreUtils', () => {
     });
 
     it('generates letters correctly for single name', () => {
-      const mockSingleName = [{ clerkId: 'user3', name: 'John' }];
+      const mockSingleName: any[] = [{ clerkId: 'user3', name: 'John' }];
       const result = resolveCandidateInfo(mockSingleName, 'user3');
       expect(result.letters).toEqual('J');
     });
@@ -50,9 +50,9 @@ describe('coreUtils', () => {
       ];
 
       const result = groupMeetingsByStatus(mockMeetings);
-      expect(result.upcoming.length).toBe(2);
-      expect(result.completed.length).toBe(1);
-      expect(result.succeeded.length).toBe(1);
+      expect(result.upcoming?.length).toBe(2);
+      expect(result.completed?.length).toBe(1);
+      expect(result.succeeded?.length).toBe(1);
       expect(result.failed).toBeUndefined();
     });
 
